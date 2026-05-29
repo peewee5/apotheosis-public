@@ -1,5 +1,7 @@
 # Apotheosis: Feedback & Issue Tracker
 
+**Apotheosis** is an iOS and tvOS media client for Emby, Xtream Codes (XC), and M3U/XMLTV playlists. One app for your self-hosted media server and your IPTV provider. See [`FEATURES.md`](FEATURES.md) for what's shipped, what's coming, and what's out of scope.
+
 This repo is the public face of Apotheosis for bug reports, feature requests, and beta feedback. The app's source lives in a private repo.
 
 ## What lives here
@@ -21,7 +23,7 @@ Open a thread in **Discussions → Feature Requests**. One idea per thread keeps
 
 ## Beta surveys
 
-If you're on the TestFlight beta, the current round's survey is in [`BETA_SURVEY.md`](BETA_SURVEY.md). Answers go in the matching Discussions thread under "Beta Feedback". Threaded responses let us follow up on specific points without losing the rest of your feedback.
+If you're on the TestFlight beta, fill out the [current round's survey](https://forms.gle/9N1M99NinnUG57yS8). The full question list is in [`BETA_SURVEY.md`](BETA_SURVEY.md) if you want to skim before committing.
 
 ## Privacy
 

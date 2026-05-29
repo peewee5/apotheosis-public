@@ -1,6 +1,12 @@
 # Beta Survey
 
-If you're on the TestFlight beta, these are the questions we want answers to for the current round. Post your answers in the matching thread under **Discussions → Beta Feedback** — that lets us follow up on specific points without losing the rest.
+**Fill it out here:** [Google Form](https://forms.gle/9N1M99NinnUG57yS8) — takes 5-10 minutes, answer whatever resonates.
+
+The questions are written out below if you'd rather skim them first before deciding what to fill in.
+
+---
+
+If you're on the TestFlight beta, these are the questions we want answers to for the current round. Post any extra notes or follow-ups in the matching thread under **Discussions → Beta Feedback**.
 
 Skip any question that doesn't apply. Partial answers are fine. Honest "this felt weird" is more useful than diplomatic "this was fine".
 
