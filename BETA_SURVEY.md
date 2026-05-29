@@ -1,6 +1,6 @@
 # Beta Survey
 
-**Fill it out here:** [Google Form](https://forms.gle/9N1M99NinnUG57yS8) — takes 5-10 minutes, answer whatever resonates.
+**Fill it out here:** [Google Form](https://forms.gle/9N1M99NinnUG57yS8). Takes 5-10 minutes. Answer whatever resonates.
 
 The questions are written out below if you'd rather skim them first before deciding what to fill in.
 
@@ -38,11 +38,11 @@ These are the paths most likely to surface bugs.
 1. **Custom rails.** Create a rail with two or three filter axes (genre + decade + source, for example). Does the "See All" destination show what you expected?
 2. **Language filter.** Create a language-filtered rail (Japanese is a good test if you have anime). Does it correctly surface content where Japanese is the primary audio?
 3. **Large library pagination.** If you have a library with more than 1000 items, do the items beyond the first 1000 appear after a few seconds of scrolling?
-4. **AirPlay with VLC content.** Start an MKV from Emby, then activate AirPlay. Expect a brief pause then handoff to AVPlayer on the receiver. Disconnect AirPlay — expect to swap back to local VLC playback at the same position.
+4. **AirPlay with VLC content.** Start an MKV from Emby, then activate AirPlay. Expect a brief pause then handoff to AVPlayer on the receiver. Disconnect AirPlay. Expect to swap back to local VLC playback at the same position.
 5. **AirPlay with live TV.** Activate AirPlay on an XC live stream. Does it route cleanly?
 6. **Picture-in-Picture for VOD.** Start a movie or episode, swipe away to background or hit the PiP button. Does PiP engage cleanly for both Emby and XC content?
 7. **iCloud sync.** Watch something on one device (signed into iCloud), open Apotheosis on a second device on the same Apple ID. Does watch state and resume position carry over?
-8. **VLC engine content.** If you played any MKV, AVI, or FLV files — Apotheosis routes these through a different engine (VLC) automatically. Did the player feel comparable to native content? Any differences in controls, title display, or quality?
+8. **VLC engine content.** If you played any MKV, AVI, or FLV files, Apotheosis routes these through a different engine (VLC) automatically. Did the player feel comparable to native content? Any differences in controls, title display, or quality?
 9. **Track language persistence.** Set a preferred audio language in Settings → Audio & Subtitles. Play episode 1 of a series, then skip to episode 2. Did the language carry over?
 
 ---
@@ -67,4 +67,4 @@ A few interactions only reproduce on a real device. If you can:
 
 ## Anything else
 
-Stuff that doesn't fit a category, or that we didn't think to ask about. The most valuable feedback is usually the "this felt off but I can't articulate why" stuff — put it under here and we'll follow up.
+Stuff that doesn't fit a category, or that we didn't think to ask about. The best feedback is usually the "this felt off but I can't articulate why" stuff. Put it here and we'll follow up.
