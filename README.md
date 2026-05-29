@@ -1,6 +1,6 @@
 # Apotheosis: Feedback & Issue Tracker
 
-This repo is the public face of [Apotheosis](TestFlight link coming) for bug reports, feature requests, and beta feedback. The app's source lives in a private repo.
+This repo is the public face of Apotheosis for bug reports, feature requests, and beta feedback. The app's source lives in a private repo.
 
 ## What lives here
 
