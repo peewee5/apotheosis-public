@@ -2,7 +2,7 @@
 
 **Apotheosis** is an iOS and tvOS media client for Emby, Xtream Codes (XC), and M3U/XMLTV playlists. One app for your self-hosted media server and your IPTV provider. See [`FEATURES.md`](FEATURES.md) for what's shipped, what's coming, and what's out of scope.
 
-**Want in?** [Request beta access](https://forms.gle/aESrBZQWD4vZjuUA7). Invite-only TestFlight, round one is small.
+**Want in?** [Join the TestFlight beta](https://testflight.apple.com/join/ksy4pry8). If you'd rather we reach out first, [request access through the form](https://forms.gle/aESrBZQWD4vZjuUA7). Early build, so expect rough edges.
 
 This repo is the public face of Apotheosis for bug reports, feature requests, and beta feedback. The app's source lives in a private repo.
 
