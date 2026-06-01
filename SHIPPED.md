@@ -13,6 +13,7 @@ Reseller IPTV playlists routinely dump 30,000 or more channels into a single cat
 - Grid and list layout is now a single tap, not a menu. Quick Chips mode (channels vs. categories) is the same. Both toggles sit where they belong: layout next to the category name, chip mode in the toolbar.
 - Channel tiles strip the encoding noise out of movie names. "War Machine 2026 [1080p] [BluRay]" becomes "War Machine 2026" with a small "1080p · BluRay" note below, so same-title entries at different qualities stay easy to tell apart.
 - Custom channel names (set in Settings) now show everywhere: the guide, the large list, the large grid.
+- Live channels in the large list and grid now show what is on now as you scroll, fetched gently in the background so even a huge playlist does not hammer your provider. (Movie and other on-demand entries stay clean, since they have no live schedule.)
 - M3U playlists with XMLTV show what is on now, with a progress bar, right in the large list and grid.
 - Bug reports can carry a redacted log when "Include Logs" is on. Scrubbed on your device before sending, goes only to the developer, never the public tracker.
 
