@@ -15,7 +15,7 @@ Queued for the beta period. If something's missing, check here first.
 - **In-player channel list overlay.** Pick a new channel without dismissing the player first.
 - **Fresh-drop priority in Continue Watching.** When a new episode releases for a show you're caught up on, it jumps to the front of CW instead of getting buried behind everything else you've been watching that week.
 - **Jellyfin support.** Adding alongside Emby. The two share most of the API surface, so most of the existing Emby code carries over.
-- **iPad and tvOS layout pass.** Playback works on both. Discovery layouts are tuned for iPhone right now.
+- **iPad layout pass.** Discovery layouts are tuned for iPhone right now. Grid density, rail proportions, and the version chip row all need a pass for the larger canvas.
 
 ---
 
@@ -28,6 +28,7 @@ Post-beta. Not in the current build.
 - **Trakt sync.** Cross-device watch history and ratings. Bundled with TMDB integration so XC content gets proper cast and crew metadata.
 - **Multi-server.** Connect more than one Emby server at the same time (XC and M3U too, eventually). Each server gets its own libraries, customizations, and credentials. The per-server settings page is already laid out for this; the underlying storage refactor is the rest.
 - **Multi-profile / household.** v1 is single-user by design. Parental controls and per-profile state (resume positions, favorites, watch history scoped per profile) land here.
+- **tvOS.** The app compiles and playback works, but the interaction layer is built for touch and doesn't translate to a remote. Directional focus, click-to-select, and the Siri Remote's gesture surface all need purpose-built handling. It's closer to a second client UI sharing the model layer than a layout adjustment. Post-beta.
 
 ---
 
@@ -138,6 +139,12 @@ Channels with empty or 503 EPG endpoints borrow programme data from siblings sha
 Adjacent programmes that overlap in the schedule data (a "show A ends 13:05, show B starts 13:00" situation, common in XC feeds) get trimmed at ingestion so tiles butt up cleanly in the grid instead of stacking on top of each other.
 
 Rows actively fetching show greyed placeholder tiles with a moving gradient sweep. Rows that came back empty show "No EPG data" with a small icon at the leading edge, so you can tell at a glance whether to wait or move on. The shimmer runs on Core Animation, which keeps the sweep smooth even while the main thread is busy decoding the rest of the EPG batch.
+
+### Large channel sets
+
+Some IPTV providers dump 30,000+ channels into a single category, which is more than the EPG grid can render without running out of memory. Above 1,500 channels in one view, Apotheosis switches to a virtualized browser instead: a flat list or a card grid, your pick, with the choice remembered. Drop back under the threshold and the full guide returns on its own.
+
+A search field filters the loaded channels by name as you type, with no network round-trip. Names honor your custom renames, same as everywhere else, and VOD-style titles get cleaned up: "War Machine 2026 [1080p] [BluRay]" reads as "War Machine 2026" with the quality tucked underneath, so two copies at different qualities stay easy to tell apart. Live channels fill in what's on now as you scroll, fetched a few at a time so even a huge playlist doesn't hammer your provider; entries with no program guide (most VOD) skip the fetch.
 
 ### Quick Chips
 
@@ -266,7 +273,7 @@ Hides on scroll-down with a 12pt threshold, restores on any upward scroll. Hides
 
 **Channel store.** File-backed (UserDefaults isn't built for 70k channels). iCloud snapshot trimmed to user-touched channels only (favorites, hides, pins), so KVS quota doesn't matter.
 
-**Log buffer.** 500-entry actor-based ring buffer. Bug reports attach a filtered excerpt automatically. Console prints are gated to Debug builds only.
+**Log buffer.** 500-entry actor-based ring buffer for live viewing, backed by an on-disk log that rotates each launch. So if the app restarts unexpectedly, a bug report can carry the previous session's log, the lead-up to whatever happened, not just the fresh one. Both are redacted before they leave the device. Console prints are gated to Debug builds only.
 
 **Privacy.** No analytics, no tracking SDK, no third-party crash reporter that phones home. Bug reports go through a Cloudflare Worker that creates GitHub Issues server-side, so the GitHub token never ships in the binary.
 
@@ -279,7 +286,7 @@ This app holds credentials for servers you don't own: Emby logins, XC subscripti
 - **No backend.** Apotheosis talks directly to your servers. There's no Apotheosis-controlled cloud holding anything about you.
 - **No analytics, no tracking SDK, no third-party crash reporter that phones home.** Every dependency that exists in the app is there to render media or talk to your servers, not to phone home about you. This is also a supply-chain control. Anything that phones home is an exfiltration vector for the credentials this app holds.
 - **Credentials live in the Keychain** with the "this device only" accessibility class. Per-profile isolation so a leak from one server doesn't compound across all of them.
-- **TLS posture.** Apple's App Transport Security is enforced for any connection on the public internet. TLS 1.2+ with a valid cert is required for XC providers and any Emby server reachable from the open web. LAN networking has a carve-out for RFC 1918, link-local, `.local`, and loopback hosts, since self-hosted Emby commonly sits there with HTTP or a self-signed cert and that's the typical install. The trade-off: XC providers that only expose HTTP on the open web stop working in this build. Tighter posture (per-profile insecure opt-in, certificate pinning, server identity checks on first connect) lands in the next security round.
+- **TLS posture.** Apple's App Transport Security is enforced for any connection on the public internet: TLS 1.2+ with a valid cert for XC providers and any Emby server reachable from the open web. Self-hosted Emby on a LAN (RFC 1918, link-local, `.local`, loopback) is the common case, so there's a per-profile "allow insecure connection" opt-in for HTTP or self-signed certs on those hosts, with an "Unencrypted" badge on the server row in Settings. Tailscale hosts (`*.ts.net`, the `100.64/10` range) are recognized too, since WireGuard already encrypts the transport. And on first connect Apotheosis records the Emby server's identity, its GUID plus cert fingerprint: a renewed cert gets a one-time notice, but a different server answering at the same address stops and asks before you trust it.
 - **Bug reports redact credentials.** The in-app reporter strips anything that looks like a URL, token, or stored credential before it leaves the device. The pipeline that creates GitHub Issues holds nothing identifying server-side.
 
 The full security spec lives in `CLAUDE.md` at the repo root. If you've ever sideloaded an IPTV app that uploaded your credentials somewhere shady, you'll appreciate the difference.
