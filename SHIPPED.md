@@ -15,7 +15,7 @@ Reseller IPTV playlists routinely dump 30,000 or more channels into a single cat
 - Custom channel names (set in Settings) now show everywhere: the guide, the large list, the large grid.
 - Live channels in the large list and grid now show what is on now as you scroll, fetched gently in the background so even a huge playlist does not hammer your provider. (Movie and other on-demand entries stay clean, since they have no live schedule.)
 - M3U playlists with XMLTV show what is on now, with a progress bar, right in the large list and grid.
-- Bug reports can carry a redacted log when "Include Logs" is on. Scrubbed on your device before sending, goes only to the developer, never the public tracker.
+- Bug reports can carry a redacted log when "Include Logs" is on. Scrubbed on your device before sending, goes only to the developer, never the public tracker. If the app restarts unexpectedly, the report now also carries the log from *before* the restart, so crashes are far easier to track down.
 
 ## 0.9.0 (2) · 2026-05-30
 
