@@ -2,14 +2,19 @@
 
 A running log of what's changed, newest first. If you're on a TestFlight build and want to know what to look for, start here.
 
-## 0.9.0 (4) · 2026-05-31
+## 0.9.0 (4) · 2026-06-01
 
-**Big Live TV playlists done right, plus richer bug reports.**
+**Live TV navigation rebuilt for the real world of massive IPTV playlists.**
 
-- Huge channel lists (tens of thousands of channels) no longer crash the app. Large categories now open in a fast, scrollable browser instead of the full guide, so even a 30,000-channel playlist loads and scrolls smoothly.
-- Browse those large lists as a grid or a plain list, your pick. The layout switch sits next to the category name and remembers your choice.
-- EPG-linked M3U playlists show what's on now, with a progress bar, right in the large list and grid, not just in the guide.
-- Bug reports can carry a redacted log when "Include Logs" is on. It's scrubbed on your device (no server addresses, credentials, or stream URLs) and goes only to the developer, never the public tracker, so problems are much faster to pin down.
+Reseller IPTV playlists routinely dump 30,000 or more channels into a single category. Most clients become unusable at that scale. This build fixes that, then adds a round of polish across navigation, display, and bug reporting.
+
+- Huge categories (over 1,500 channels) open in a purpose-built scrollable browser instead of the full guide, which runs out of memory trying to render 30,000 rows. Switch to any normal-sized category and the full guide returns automatically.
+- Search in large channel sets is one tap away. Type a name and results filter instantly from the already-loaded list. No network call, no delay.
+- Grid and list layout is now a single tap, not a menu. Quick Chips mode (channels vs. categories) is the same. Both toggles sit where they belong: layout next to the category name, chip mode in the toolbar.
+- Channel tiles strip the encoding noise out of movie names. "War Machine 2026 [1080p] [BluRay]" becomes "War Machine 2026" with a small "1080p · BluRay" note below, so same-title entries at different qualities stay easy to tell apart.
+- Custom channel names (set in Settings) now show everywhere: the guide, the large list, the large grid.
+- M3U playlists with XMLTV show what is on now, with a progress bar, right in the large list and grid.
+- Bug reports can carry a redacted log when "Include Logs" is on. Scrubbed on your device before sending, goes only to the developer, never the public tracker.
 
 ## 0.9.0 (2) · 2026-05-30
 
