@@ -28,7 +28,7 @@ Post-beta. Not in the current build.
 - **Trakt sync.** Cross-device watch history and ratings. Bundled with TMDB integration so XC content gets proper cast and crew metadata.
 - **Multi-server.** Connect more than one Emby server at the same time (XC and M3U too, eventually). Each server gets its own libraries, customizations, and credentials. The per-server settings page is already laid out for this; the underlying storage refactor is the rest.
 - **Multi-profile / household.** v1 is single-user by design. Parental controls and per-profile state (resume positions, favorites, watch history scoped per profile) land here.
-- **tvOS.** The app compiles and playback works, but the interaction layer is built for touch and doesn't translate to a remote. Directional focus, click-to-select, and the Siri Remote's gesture surface all need purpose-built handling. It's closer to a second client UI sharing the model layer than a layout adjustment. Post-beta.
+- **tvOS.** In active development on its own branch, not in the current TestFlight build yet. The interaction layer is being rebuilt for the remote rather than ported from touch. Done so far: a full discovery hero (backdrop, clearlogo title, action cluster with an edge-paged carousel), big-poster library grids with focus-driven Sort and Genre pickers, and a focus model tuned for directional navigation. Settings, the detail page, Live TV, and search still need the same treatment. Credential setup is already solved: pair an Apple TV to your iPhone over the local network and your servers carry across, so you're not retyping logins on a remote.
 
 ---
 
