@@ -15,6 +15,11 @@
   <img src="https://img.shields.io/badge/telemetry-none-brightgreen" alt="no telemetry">
 </p>
 
+<p align="center">
+  <a href="https://github.com/sponsors/peewee5"><img src="https://img.shields.io/badge/GitHub-Sponsor-EA4AAA?logo=githubsponsors&logoColor=white" alt="Sponsor on GitHub"></a>
+  <a href="https://ko-fi.com/jmquik"><img src="https://img.shields.io/badge/Ko--fi-Support-FF5E5B?logo=kofi&logoColor=white" alt="Support on Ko-fi"></a>
+</p>
+
 One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**, **Plex**, **Xtream Codes IPTV**, and **M3U/XMLTV** as equals: curated discovery, a direct-play player that doesn't transcode your files, and Live TV with a real EPG grid. No backend of its own. Your servers, your data.
 
 **Apotheosis is a player, not a service.** It doesn't provide, host, sell, or resell any media, TV channels, or subscriptions. You bring your own server (Emby, Jellyfin, Plex) or your own IPTV account; nothing plays without a server and credentials you already have.
@@ -142,3 +147,7 @@ Playback runs on **[AetherEngine](https://github.com/superuser404notfound/Aether
 ## License
 
 Apotheosis is closed-source. It builds on open-source components (AetherEngine, FFmpeg, dav1d, and others) under the LGPL and permissive licenses, with no GPL or nonfree parts. The full inventory, the license texts, and the LGPL relink offer are in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md).
+
+## Trademarks
+
+Emby, Jellyfin, Plex, Xtream Codes, Infuse, and other product names referenced here are trademarks of their respective owners. Apotheosis is an independent client, not affiliated with, endorsed by, or sponsored by any of them or by any content provider or network. Any media titles or artwork visible in screenshots belong to their respective owners. Apotheosis is a player and provides no content.
