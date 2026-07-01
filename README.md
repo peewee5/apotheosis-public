@@ -10,7 +10,9 @@ Most IPTV clients pretend your personal media library doesn't exist. Most media 
 
 ![Apotheosis on Apple TV](docs/screenshots/tvos-discovery-hero.png)
 
-One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**, **Xtream Codes IPTV**, and **M3U/XMLTV** as equals: curated discovery, a direct-play player that doesn't transcode your files, and Live TV with a real EPG grid. No backend of its own. Your servers, your data.
+One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**, **Plex**, **Xtream Codes IPTV**, and **M3U/XMLTV** as equals: curated discovery, a direct-play player that doesn't transcode your files, and Live TV with a real EPG grid. No backend of its own. Your servers, your data.
+
+**Apotheosis is a player, not a service.** It doesn't provide, host, sell, or resell any media, TV channels, or subscriptions. You bring your own server (Emby, Jellyfin, Plex) or your own IPTV account; nothing plays without a server and credentials you already have.
 
 > **In TestFlight, invite-only.** [Request access](https://forms.gle/aESrBZQWD4vZjuUA7) or [file a bug](#bugs--feature-requests). Current rough edges are under [Known issues](#known-issues).
 
@@ -49,11 +51,11 @@ Apotheosis treats your library and your IPTV as first-class peers. Continue Watc
 
 **Jellyfin** (early support): add a server from the same screen as Emby. The app detects which one you're connecting to and reuses the Emby path, so browsing, Continue Watching, and playback work the same way. Still being road-tested.
 
+**Plex**: sign in with your Plex account and pick a server. Library browsing, Continue Watching from Plex's on-deck list, detail pages at Emby parity, and search, all through the same player.
+
 **Xtream Codes (XC) IPTV**: VOD, Series, and Live TV. Account expiry and connection status in Settings. Favorites synced to iCloud so they survive reinstalls.
 
 **M3U + XMLTV**: paste a playlist URL. Handles 70k+ channel playlists with CRLF line endings, file-backed storage to get past the UserDefaults 4 MB cap, and XMLTV EPG matched by tvg-id.
-
-Plex is on the roadmap.
 
 ---
 

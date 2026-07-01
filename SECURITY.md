@@ -30,14 +30,14 @@ Expect an acknowledgement within a few days. When a fix ships, the advisory is p
 
 ## Scope
 
-Apotheosis connects to media servers (Emby, Jellyfin, Xtream Codes IPTV, M3U/XMLTV) that the developer does not operate, and it parses untrusted media and playlist data. The areas most relevant to security:
+Apotheosis connects to media servers (Emby, Jellyfin, Plex, Xtream Codes IPTV, M3U/XMLTV) that the developer does not operate, and it parses untrusted media and playlist data. The areas most relevant to security:
 
 - **Credential handling.** Server credentials and tokens live in the iOS Keychain, this-device-only by default. They are never written to plain storage and never leave the device except to the server they belong to. iCloud Keychain sync is off unless you explicitly turn it on.
 - **Network transport.** How the app talks to your servers, including TLS trust decisions for self-signed servers on a home network and the redirect handling for IPTV stream CDNs.
 - **Media parsing.** Demuxing and decoding of untrusted containers, subtitles, and playlists (the FFmpeg and dav1d surface inside the playback engine, plus the M3U and XMLTV parsers).
 - **Diagnostics.** The in-app bug reporter redacts server URLs, hosts, credentials, and stream URLs on the device before anything is sent. Reports carry no analytics and no tracking identifiers.
 
-Out of scope here: vulnerabilities in the media servers themselves (Emby, Jellyfin, or an IPTV provider's panel) belong on their own trackers, and issues in upstream FFmpeg or dav1d should go upstream, though we are glad to know if a bundled build is affected.
+Out of scope here: vulnerabilities in the media servers themselves (Emby, Jellyfin, Plex, or an IPTV provider's panel) belong on their own trackers, and issues in upstream FFmpeg or dav1d should go upstream, though we are glad to know if a bundled build is affected.
 
 ## What Apotheosis does not do
 

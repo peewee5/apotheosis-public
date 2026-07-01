@@ -4,6 +4,8 @@ One client for iPhone, iPad, and Apple TV. Emby, Jellyfin, Xtream Codes, and M3U
 
 What you get: a 70k-channel EPG that doesn't choke, Continue Watching that merges across every source you've connected, dedup that treats your 4K and 1080p copies of the same film as one tile, and a player that direct-plays 4K HDR and MKV on Apple TV without transcoding. Plus a bug reporter that holds nothing about you, and security posture closer to a password manager than a typical media app.
 
+Apotheosis is a player, not a service. It doesn't provide, host, sell, or resell any media, TV channels, or subscriptions. You connect it to servers and accounts you already have (your own Emby, Jellyfin, or Plex server, your own IPTV subscription, your own M3U playlist). Nothing plays without them.
+
 ---
 
 ## Platforms
@@ -12,10 +14,16 @@ What you get: a 70k-channel EPG that doesn't choke, Continue Watching that merge
 
 **Apple TV.** Built for the remote, not ported from touch: focus-driven discovery, big-poster library grids, a full Live TV guide, detail pages, search, and Settings. Sign in on your iPhone and push the connection to the Apple TV over the local network, so you're not typing server URLs on an on-screen keyboard.
 
+![Discovery on Apple TV](docs/screenshots/tvos-discovery-hero.png)
+
 <table>
   <tr>
-    <td width="50%"><img src="docs/screenshots/tvos-discovery-hero.png" alt="Discovery on Apple TV"></td>
+    <td width="50%"><img src="docs/screenshots/tvos-library-grid.png" alt="Library grid on Apple TV"></td>
     <td width="50%"><img src="docs/screenshots/tvos-epg-grid.png" alt="Live TV guide on Apple TV"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/tvos-player-chrome.png" alt="Player on Apple TV"></td>
+    <td width="50%"><img src="docs/screenshots/tvos-settings.png" alt="Settings on Apple TV"></td>
   </tr>
 </table>
 
@@ -36,6 +44,10 @@ What you get: a 70k-channel EPG that doesn't choke, Continue Watching that merge
 ### Jellyfin
 
 Early support. Add a Jellyfin server from the same Media Server screen as Emby; the app detects which one you're connecting to and reuses the Emby code path, so browsing, Continue Watching, Favorites, and playback work the same way. Tokens go in the Keychain, and the iPhone-to-Apple-TV pairing carries a Jellyfin connection across the same as an Emby one. Still being road-tested, so kick the tires and report anything off.
+
+### Plex
+
+Sign in with your Plex account and pick a server. Library browsing for movies and shows, Continue Watching driven by Plex's own on-deck list, detail pages at parity with Emby (cast, file info, resolution chips, pre-play audio and subtitle pickers), and search across your Plex libraries. Playback direct-plays through the same engine, so a 4K HDR remux off Plex behaves like one off Emby.
 
 ### Xtream Codes
 
@@ -61,7 +73,7 @@ M3U and XC channels coexist in the same store via a separate ID namespace, so th
 
 ## Player
 
-<img src="docs/screenshots/tvos-player-chrome.png" alt="Player chrome on Apple TV" width="480">
+<img src="docs/screenshots/player-chrome-full.png" alt="Player chrome" width="320">
 
 ### One engine, direct play
 
@@ -183,7 +195,7 @@ Count the duplicates above.
 
 Hero carousel, two cards visible. Tap the centred play button to resume directly. Tap anywhere else to open detail.
 
-Cross-source: Emby and XC VOD share one rail. The sibling-aware dedup covered above keeps the rail clean when the same title exists in multiple places. The tile flips to whichever version you played most recently, so the artwork you see matches the version that actually plays. When a new episode drops for a show you're caught up on, it jumps to the front of the rail instead of getting buried behind everything else you watched that week.
+Cross-source: Emby, XC, and Plex share one rail. The sibling-aware dedup covered above keeps the rail clean when the same title exists in multiple places. The tile flips to whichever version you played most recently, so the artwork you see matches the version that actually plays. When a new episode drops for a show you're caught up on, it jumps to the front of the rail instead of getting buried behind everything else you watched that week.
 
 ### Custom Rails
 
@@ -230,7 +242,7 @@ Top-level tab with its own Liquid Glass circle next to the main pill (Apple Musi
 - **Channels.** Live channel name matches. Tap to play.
 - **On Now.** Programmes currently airing that match the query. Tap plays the parent channel; the search results act as the player's prev/next channel context.
 - **Upcoming.** Programmes starting within the next 24 hours, with a relative time badge ("in 45m", "Tomorrow 9:00 PM").
-- **Movies, Series, Episodes.** VOD results from Emby and XC combined. Cap of 20 per section with a "See All" pivot that expands without a second fetch.
+- **Movies, Series, Episodes.** Results from Emby, XC, and Plex combined. Cap of 20 per section with a "See All" pivot that expands without a second fetch.
 
 Every result card has a long-press menu tuned to its type. Live cards offer Play Now, Go to EPG (jumps to LiveTV with the channel's category selected), Favorite, and Pin to Quick Channels. Movie cards offer resume-aware Play (centered "Continue watching?" prompt when there's a saved position), Favorite, Mark Watched, and Add to Playlist for Emby items. Series cards offer Play (auto-resumes the most recently progressed episode), Favorite, and Mark Series Watched. Episode cards offer Play, a Mark Watched submenu (Episode / Season / Up to This Episode), Series-scoped Favorite, and Add to Playlist. Toast confirms every action since the search surface doesn't reflect favorite or watched state visually.
 
@@ -285,7 +297,7 @@ This app holds credentials for servers you don't own: Emby and Jellyfin logins, 
 - **No backend.** Apotheosis talks directly to your servers. There's no Apotheosis-controlled cloud holding anything about you.
 - **No analytics, no tracking SDK, no third-party crash reporter that phones home.** Every dependency that exists in the app is there to render media or talk to your servers, not to phone home about you. This is also a supply-chain control. Anything that phones home is an exfiltration vector for the credentials this app holds.
 - **Credentials live in the Keychain** with the "this device only" accessibility class. Per-profile isolation so a leak from one server doesn't compound across all of them. iCloud Keychain sync is off unless you turn it on explicitly.
-- **TLS posture.** Apple's App Transport Security is enforced for any connection on the public internet: TLS 1.2+ with a valid cert for XC providers and any server reachable from the open web. Self-hosted Emby on a LAN (RFC 1918, link-local, `.local`, loopback) is the common case, so there's a per-profile "allow insecure connection" opt-in for HTTP or self-signed certs on those hosts, with an "Unencrypted" badge on the server row in Settings. Tailscale hosts (`*.ts.net`, the `100.64/10` range) are recognized too, since WireGuard already encrypts the transport. And on first connect Apotheosis records the server's identity, its GUID plus cert fingerprint: a renewed cert gets a one-time notice, but a different server answering at the same address stops and asks before you trust it.
+- **TLS posture.** Any connection to a server on the public internet requires TLS 1.2 or better with a valid certificate, enforced per connection by the app itself: XC providers and any server reachable from the open web. Self-hosted Emby on a LAN (RFC 1918, link-local, `.local`, loopback) is the common case, so there's a per-profile "allow insecure connection" opt-in for HTTP or self-signed certs on those hosts, with an "Unencrypted" badge on the server row in Settings. Tailscale hosts (`*.ts.net`, the `100.64/10` range) are recognized too, since WireGuard already encrypts the transport. And on first connect Apotheosis records the server's identity, its GUID plus cert fingerprint: a renewed cert gets a one-time notice, but a different server answering at the same address stops and asks before you trust it.
 - **Bug reports redact credentials.** The in-app reporter strips anything that looks like a URL, token, or stored credential before it leaves the device, for every configured source. The pipeline that files GitHub Issues holds nothing identifying server-side.
 
 The full security spec and how to report a vulnerability privately live in `SECURITY.md`. If you've ever sideloaded an IPTV app that uploaded your credentials somewhere shady, you'll appreciate the difference.
@@ -296,7 +308,6 @@ The full security spec and how to report a vulnerability privately live in `SECU
 
 Not in the current build.
 
-- **Plex.** Its own auth and library model.
 - **Trakt sync.** Cross-device watch history and ratings, bundled with TMDB metadata so XC content gets proper cast and crew.
 - **Multi-server.** More than one Emby server connected at once (XC and M3U too, eventually), each with its own libraries, customizations, and credentials. The per-server settings page is already laid out for it; the storage refactor is the rest.
 - **Multi-profile / household.** v1 is single-user by design. Parental controls and per-profile state (resume, favorites, watch history scoped per profile) land here.
