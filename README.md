@@ -1,14 +1,19 @@
-# Apotheosis
+<p align="center">
+  <img src="docs/apotheosis-logo.png" width="170" alt="Apotheosis">
+</p>
 
-Most IPTV clients pretend your personal media library doesn't exist. Most media players don't know what IPTV is. Apotheosis handles both.
+<h1 align="center">Apotheosis</h1>
 
-<p>
+<p align="center">
+  Most IPTV clients pretend your personal media library doesn't exist.<br>
+  Most media players don't know what IPTV is. <b>Apotheosis handles both.</b>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/platforms-iOS%20%7C%20iPadOS%20%7C%20tvOS-informational" alt="platforms">
   <img src="https://img.shields.io/badge/TestFlight-invite--only-blue" alt="TestFlight, invite only">
   <img src="https://img.shields.io/badge/telemetry-none-brightgreen" alt="no telemetry">
 </p>
-
-![Apotheosis on Apple TV](docs/screenshots/tvos-discovery-hero.png)
 
 One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**, **Plex**, **Xtream Codes IPTV**, and **M3U/XMLTV** as equals: curated discovery, a direct-play player that doesn't transcode your files, and Live TV with a real EPG grid. No backend of its own. Your servers, your data.
 
@@ -20,20 +25,20 @@ One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**
 
 ## Screenshots
 
-Apple TV and iPhone, the same app.
+The Live TV guide and Settings on Apple TV; the mini-player dock and custom tab bar on iPhone.
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/screenshots/tvos-player-chrome.png" alt="Player on Apple TV"></td>
     <td width="50%"><img src="docs/screenshots/tvos-epg-grid.png" alt="Live TV guide on Apple TV"></td>
+    <td width="50%"><img src="docs/screenshots/tvos-settings.png" alt="Settings on Apple TV"></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/screenshots/player-chrome-full.png" alt="Player on iPhone"></td>
-    <td width="50%"><img src="docs/screenshots/continue-watching-hero.png" alt="Continue Watching on iPhone"></td>
+    <td width="50%"><img src="docs/screenshots/mini-player-dock.png" alt="Mini-player dock on iPhone"></td>
+    <td width="50%"><img src="docs/screenshots/tab-bar.png" alt="Custom tab bar on iPhone"></td>
   </tr>
 </table>
 
-More, annotated, in [`FEATURES.md`](FEATURES.md), including the version-sibling dedup shown side by side against Infuse.
+More in [`FEATURES.md`](FEATURES.md).
 
 ---
 

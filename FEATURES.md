@@ -1,6 +1,6 @@
 # Apotheosis: Feature Reference
 
-One client for iPhone, iPad, and Apple TV. Emby, Jellyfin, Xtream Codes, and M3U/XMLTV behind a single player. Built by someone who wanted one app to do everything.
+One client for iPhone, iPad, and Apple TV. Emby, Jellyfin, Plex, Xtream Codes, and M3U/XMLTV behind a single player. Built by someone who wanted one app to do everything.
 
 What you get: a 70k-channel EPG that doesn't choke, Continue Watching that merges across every source you've connected, dedup that treats your 4K and 1080p copies of the same film as one tile, and a player that direct-plays 4K HDR and MKV on Apple TV without transcoding. Plus a bug reporter that holds nothing about you, and security posture closer to a password manager than a typical media app.
 
@@ -14,15 +14,9 @@ Apotheosis is a player, not a service. It doesn't provide, host, sell, or resell
 
 **Apple TV.** Built for the remote, not ported from touch: focus-driven discovery, big-poster library grids, a full Live TV guide, detail pages, search, and Settings. Sign in on your iPhone and push the connection to the Apple TV over the local network, so you're not typing server URLs on an on-screen keyboard.
 
-![Discovery on Apple TV](docs/screenshots/tvos-discovery-hero.png)
-
 <table>
   <tr>
-    <td width="50%"><img src="docs/screenshots/tvos-library-grid.png" alt="Library grid on Apple TV"></td>
     <td width="50%"><img src="docs/screenshots/tvos-epg-grid.png" alt="Live TV guide on Apple TV"></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/tvos-player-chrome.png" alt="Player on Apple TV"></td>
     <td width="50%"><img src="docs/screenshots/tvos-settings.png" alt="Settings on Apple TV"></td>
   </tr>
 </table>
@@ -73,8 +67,6 @@ M3U and XC channels coexist in the same store via a separate ID namespace, so th
 
 ## Player
 
-<img src="docs/screenshots/player-chrome-full.png" alt="Player chrome" width="320">
-
 ### One engine, direct play
 
 Playback runs on a single engine across all three platforms: it demuxes with FFmpeg and hands decoding to Apple's VideoToolbox. 4K HDR, HEVC 10-bit, MKV, and raw MPEG-TS play with no transcoding and no server re-encode. AVPlayer handles HLS and native Apple formats and stands in as a fallback, with a watchdog that catches streams that hang silently at startup.
@@ -82,8 +74,6 @@ Playback runs on a single engine across all three platforms: it demuxes with FFm
 This matters most on Apple TV, where AVPlayer on its own can't reliably play those formats. The chrome, skip markers, auto-play-next, and the in-player episode picker are the same on iPhone, iPad, and Apple TV.
 
 ### Picture in Picture
-
-<img src="docs/screenshots/system-pip-floating.png" alt="system-pip-floating" width="320">
 
 On iPhone and iPad, playback backgrounds into the system PiP window when you press Home or pull Control Center, or tap the PiP button in the top-right cluster. It can also drop the app to the home screen as PiP starts, the way Infuse does. Apple TV doesn't do PiP.
 
@@ -169,8 +159,6 @@ The current category has its own pin button next to the dropdown title, so you c
 
 ### In-player channel nav
 
-<img src="docs/screenshots/live-player-channel-nav.png" alt="live-player-channel-nav" width="320">
-
 Prev/next channel buttons replace seek controls on live streams. Order follows the active EPG filter. If you're in Sky Sports and tap next, you get the next Sky Sports channel, not the next channel in the full list. In-place swap, no dismiss animation.
 
 ---
@@ -179,29 +167,17 @@ Prev/next channel buttons replace seek controls on live streams. Order follows t
 
 ### Sibling versioning
 
-| **Apotheosis** | **Infuse** |
-|:---:|:---:|
-| <img src="docs/screenshots/sibling-dedup-apotheosis.png" alt="Same library shown in Apotheosis with version siblings collapsed" width="280"> | <img src="docs/screenshots/sibling-dedup-infuse.png" alt="Same library shown in Infuse with every version listed separately" width="280"> |
-
 Multi-encode libraries are common in IPTV-plus-personal-server setups. Your Emby has separate 4K and 1080p folders. Your IPTV provider lists the same movie at three resolutions. Most clients show all of them, so the same title sprawls across rails, fills CW with duplicates, and ends up with a watched checkmark that only applies to one variant.
 
 Apotheosis collapses them into a single tile across every grid, every CW rail, every search result. Resolution chips on the detail page let you switch versions. The CW play button respects whichever you picked last, and marking either version watched clears both. Server data is untouched; the dedup is purely client-side, so your Emby web client still sees each version separately if that's how you want to browse there.
 
-Count the duplicates above.
-
 ### Continue Watching
-
-<img src="docs/screenshots/continue-watching-hero.png" alt="continue-watching-hero" width="320">
 
 Hero carousel, two cards visible. Tap the centred play button to resume directly. Tap anywhere else to open detail.
 
 Cross-source: Emby, XC, and Plex share one rail. The sibling-aware dedup covered above keeps the rail clean when the same title exists in multiple places. The tile flips to whichever version you played most recently, so the artwork you see matches the version that actually plays. When a new episode drops for a show you're caught up on, it jumps to the front of the rail instead of getting buried behind everything else you watched that week.
 
 ### Custom Rails
-
-<img src="docs/screenshots/custom-rails-discovery-p1.png" alt="custom-rails-discovery-p1" width="320">
-
-<img src="docs/screenshots/custom-rails-discovery-p2.png" alt="custom-rails-discovery-p2" width="320">
 
 Composable filter rails on the discovery screen. 11 axes available: genre, decade, source, person, rating floor, resolution, watched state, recency, studio, audio language, and curated source (Emby BoxSets or Playlists).
 
@@ -234,8 +210,6 @@ Season chips on the series detail page have their own long-press for full-season
 ---
 
 ## Search
-
-<img src="docs/screenshots/search-tab.png" alt="search-tab" width="320">
 
 Top-level tab with its own Liquid Glass circle next to the main pill (Apple Music / iOS 26 pattern). Searches across every configured source from one place. Five sections render in priority order:
 
