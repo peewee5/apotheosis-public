@@ -130,7 +130,7 @@ Apotheosis is a closed-source app, but here's the shape of it. SwiftUI throughou
 
 ## Built with
 
-Apotheosis is designed, built, and shipped by [peewee5](https://github.com/peewee5) in close pair-programming with **Claude** (Anthropic). The commit log is the receipt: nearly every commit carries a `Co-Authored-By: Claude` trailer.
+Apotheosis is designed, built, and shipped by [Michael Lewis](https://github.com/peewee5) in close pair-programming with **Claude** (Anthropic). The commit log is the receipt: nearly every commit carries a `Co-Authored-By: Claude` trailer.
 
 Playback runs on **[AetherEngine](https://github.com/superuser404notfound/AetherEngine)** (FFmpeg demux plus a VideoToolbox decode path), which does the direct-play heavy lifting. Thanks also to **[Moonfin](https://github.com/Moonfin-Client/Moonfin-Core)**, an early reference for what a great custom player on tvOS can be.
 
