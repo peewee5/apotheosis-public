@@ -35,7 +35,6 @@ The Live TV guide and Settings on Apple TV; the mini-player dock and custom tab 
 <table>
   <tr>
     <td width="50%"><img src="docs/screenshots/tvos-epg-grid.png" alt="Live TV guide on Apple TV"></td>
-    <td width="50%"><img src="docs/screenshots/tvos-settings.png" alt="Settings on Apple TV"></td>
   </tr>
   <tr>
     <td width="50%"><img src="docs/screenshots/mini-player-dock.png" alt="Mini-player dock on iPhone"></td>
