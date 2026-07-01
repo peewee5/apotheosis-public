@@ -17,7 +17,6 @@ Apotheosis is a player, not a service. It doesn't provide, host, sell, or resell
 <table>
   <tr>
     <td width="50%"><img src="docs/screenshots/tvos-epg-grid.png" alt="Live TV guide on Apple TV"></td>
-    <td width="50%"><img src="docs/screenshots/tvos-settings.png" alt="Settings on Apple TV"></td>
   </tr>
 </table>
 
