@@ -1,34 +1,23 @@
 # Apotheosis: Feature Reference
 
-iOS + tvOS client. Emby, Xtream Codes, M3U/XMLTV behind one player. Built by someone who wanted one app to do everything.
+One client for iPhone, iPad, and Apple TV. Emby, Jellyfin, Xtream Codes, and M3U/XMLTV behind a single player. Built by someone who wanted one app to do everything.
 
-What you get: a 70k-channel EPG that doesn't choke, Continue Watching that merges across every source you've connected, and dedup that treats your 4K and 1080p copies of the same film as one tile. Plus AirPlay that actually works on MKV via Emby transcode, a Worker-backed bug reporter that holds nothing about you, and security posture closer to a password manager than a typical media app.
-
----
-
-## Upcoming During Beta
-
-Queued for the beta period. If something's missing, check here first.
-
-- **Skip Intro / Skip Credits.** The infrastructure ships in beta (chapter-marker reader, overlay component, VLC-path mount). The button shows up when your server has named chapter markers from the Chapter Markers plugin. Default Emby chapters are unnamed five-minute fillers, so the heuristic gets a fallback during the beta period to catch more catalogs.
-- **Fine-scrub.** Tap-to-seek and drag are shipped. The hold-and-slide-up precision gesture is coming.
-- **In-player channel list overlay.** Pick a new channel without dismissing the player first.
-- **Fresh-drop priority in Continue Watching.** When a new episode releases for a show you're caught up on, it jumps to the front of CW instead of getting buried behind everything else you've been watching that week.
-- **Jellyfin support.** Adding alongside Emby. The two share most of the API surface, so most of the existing Emby code carries over.
-- **iPad layout pass.** Discovery layouts are tuned for iPhone right now. Grid density, rail proportions, and the version chip row all need a pass for the larger canvas.
+What you get: a 70k-channel EPG that doesn't choke, Continue Watching that merges across every source you've connected, dedup that treats your 4K and 1080p copies of the same film as one tile, and a player that direct-plays 4K HDR and MKV on Apple TV without transcoding. Plus a bug reporter that holds nothing about you, and security posture closer to a password manager than a typical media app.
 
 ---
 
-## Future Features
+## Platforms
 
-Post-beta. Not in the current build.
+**iPhone and iPad.** The original target. iPad currently runs the iPhone layout; a pass tuned for the larger canvas (grid density, rail proportions, the version-chip row) is still to come.
 
-- **Custom player.** Ground-up replacement for the AVPlayer + VLC composition. Tighter engine integration, frame-accurate chapter nav, better HDR / Dolby Vision path.
-- **Plex source.** Separate OAuth and library model.
-- **Trakt sync.** Cross-device watch history and ratings. Bundled with TMDB integration so XC content gets proper cast and crew metadata.
-- **Multi-server.** Connect more than one Emby server at the same time (XC and M3U too, eventually). Each server gets its own libraries, customizations, and credentials. The per-server settings page is already laid out for this; the underlying storage refactor is the rest.
-- **Multi-profile / household.** v1 is single-user by design. Parental controls and per-profile state (resume positions, favorites, watch history scoped per profile) land here.
-- **tvOS.** In active development on its own branch, not in the current TestFlight build yet. The interaction layer is being rebuilt for the remote rather than ported from touch. Done so far: a full discovery hero (backdrop, clearlogo title, action cluster with an edge-paged carousel), big-poster library grids with focus-driven Sort and Genre pickers, and a focus model tuned for directional navigation. Settings, the detail page, Live TV, and search still need the same treatment. Credential setup is already solved: pair an Apple TV to your iPhone over the local network and your servers carry across, so you're not retyping logins on a remote.
+**Apple TV.** Built for the remote, not ported from touch: focus-driven discovery, big-poster library grids, a full Live TV guide, detail pages, search, and Settings. Sign in on your iPhone and push the connection to the Apple TV over the local network, so you're not typing server URLs on an on-screen keyboard.
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/tvos-discovery-hero.png" alt="Discovery on Apple TV"></td>
+    <td width="50%"><img src="docs/screenshots/tvos-epg-grid.png" alt="Live TV guide on Apple TV"></td>
+  </tr>
+</table>
 
 ---
 
@@ -43,6 +32,10 @@ Post-beta. Not in the current build.
 **Mark as Watched / Unwatched.** Uses the canonical PlayedItems endpoint, which works across server versions. Some older builds silently no-op the JSON-body alternative, so that path is avoided.
 
 **Emby Connect.** Federated login if you'd rather sign in with your Emby Connect account and pick a server from your list.
+
+### Jellyfin
+
+Early support. Add a Jellyfin server from the same Media Server screen as Emby; the app detects which one you're connecting to and reuses the Emby code path, so browsing, Continue Watching, Favorites, and playback work the same way. Tokens go in the Keychain, and the iPhone-to-Apple-TV pairing carries a Jellyfin connection across the same as an Emby one. Still being road-tested, so kick the tires and report anything off.
 
 ### Xtream Codes
 
@@ -68,27 +61,27 @@ M3U and XC channels coexist in the same store via a separate ID namespace, so th
 
 ## Player
 
-<img src="docs/screenshots/player-chrome-full.png" alt="player-chrome-full" width="320">
+<img src="docs/screenshots/tvos-player-chrome.png" alt="Player chrome on Apple TV" width="480">
 
-### Engine routing
+### One engine, direct play
 
-AVPlayer for native Apple formats, VLC for everything else. Auto-fallback when AVPlayer rejects a container at startup, with a watchdog that catches HLS streams that hang silently. Force-engine override in Debug for testing the chrome against any content.
+Playback runs on a single engine across all three platforms: it demuxes with FFmpeg and hands decoding to Apple's VideoToolbox. 4K HDR, HEVC 10-bit, MKV, and raw MPEG-TS play with no transcoding and no server re-encode. AVPlayer handles HLS and native Apple formats and stands in as a fallback, with a watchdog that catches streams that hang silently at startup.
+
+This matters most on Apple TV, where AVPlayer on its own can't reliably play those formats. The chrome, skip markers, auto-play-next, and the in-player episode picker are the same on iPhone, iPad, and Apple TV.
 
 ### Picture in Picture
 
 <img src="docs/screenshots/system-pip-floating.png" alt="system-pip-floating" width="320">
 
-AVPlayer content backgrounds into the system PiP window when you press Home or pull Control Center. Tap the PiP button in the top-right cluster to enter it manually. VLC content (MKV, AVI, FLV, raw TS) doesn't support PiP yet, because libVLC frames don't enter AVFoundation's PiP pipeline. That gets unlocked when VLCKit 4.x lands post-beta. The button hides itself on VLC sessions so you're not staring at a control that doesn't work.
+On iPhone and iPad, playback backgrounds into the system PiP window when you press Home or pull Control Center, or tap the PiP button in the top-right cluster. It can also drop the app to the home screen as PiP starts, the way Infuse does. Apple TV doesn't do PiP.
 
 ### AirPlay
 
-VLC doesn't integrate with AirPlay, so MKV/AVI/FLV/raw TS content on VLC normally can't cast. Apotheosis watches `AVAudioSession` route changes; on AirPlay activation for an Emby item playing in VLC, it asks the Emby server for an HLS transcode via `PlaybackInfo` and swaps to AVPlayer at the current position. Swaps back when AirPlay disconnects. XC and M3U already route through AVPlayer, so AirPlay works there natively.
-
-Heads up: AirPlay receivers enforce ATS independently of iOS, so a self-signed-cert Emby on LAN can't AirPlay to Apple TV. Use a real cert (Let's Encrypt or a reverse proxy).
+XC, M3U, and HLS content routes through AVPlayer, so AirPlay works there natively. Heads up on self-hosted Emby: AirPlay receivers enforce App Transport Security independently of iOS, so an Emby server with a self-signed cert on your LAN can't AirPlay to an Apple TV regardless of how the URL is formed. Use a real cert (Let's Encrypt or a reverse proxy) if you want to AirPlay from it.
 
 ### Volume
 
-Drag on the left side, or grab the HUD track directly. The visible bar is a real slider. Writes to actual system volume, not just per-player gain. Hardware buttons mirror the HUD in real time. If Apple ever closes the system-volume path, it falls back to per-player gain automatically (VLC supports up to 200%).
+Drag on the left side, or grab the HUD track directly. The visible bar is a real slider that writes to actual system volume, not just per-player gain. Hardware buttons mirror the HUD in real time. If Apple ever closes the system-volume path, it falls back to per-player gain automatically.
 
 ### Brightness
 
@@ -106,15 +99,19 @@ Engine stays alive while you browse. Three display states:
 - Compact inline pill when you scroll down. Tab icons compressed to the left, marquee title and play button on the right.
 - Player-only pill on detail and settings pages where the tab bar is hidden.
 
-Swipe down on the full-screen player to minimize, swipe up on the mini bar to expand, swipe down to dismiss. Final position reports to Emby on every transition.
+Swipe down on the full-screen player to minimize, swipe up on the mini bar to expand, swipe down to dismiss. Final position reports to the server on every transition.
 
-### Tap-to-seek
+### Skip Intro and Skip Credits
 
-Tap anywhere on the scrub bar to jump there. Drag for fine control.
+The button surfaces on its own when the playhead enters a marked region, even with the chrome hidden, so the anime cold-open case doesn't make you tap to reveal controls first. Markers come from the server where it exposes them (Emby chapter markers, Plex segment data). No markers, no button; nothing is guessed.
+
+### Tap-to-seek and fine-scrub
+
+Tap anywhere on the scrub bar to jump there. Drag for coarse control, or hold and slide up to drop into a fine-scrub mode for frame-level positioning on long files.
 
 ### Episode navigation
 
-In-player episode list, plus prev/next skip buttons. Same in-place URL swap. Chrome stays mounted, engine reloads, no dismiss animation.
+In-player episode list, plus prev/next skip buttons. The URL swaps in place: chrome stays mounted, the engine reloads, no dismiss animation.
 
 ### Track persistence
 
@@ -122,7 +119,7 @@ Audio and subtitle preferences carry across episodes of the same series. Set Spa
 
 ### Auto-mark watched
 
-Fires at 95% of runtime, settings toggle, default on. Matches VidHub's behaviour.
+Fires at 95% of runtime. Settings toggle, default on.
 
 ---
 
@@ -139,6 +136,8 @@ Channels with empty or 503 EPG endpoints borrow programme data from siblings sha
 Adjacent programmes that overlap in the schedule data (a "show A ends 13:05, show B starts 13:00" situation, common in XC feeds) get trimmed at ingestion so tiles butt up cleanly in the grid instead of stacking on top of each other.
 
 Rows actively fetching show greyed placeholder tiles with a moving gradient sweep. Rows that came back empty show "No EPG data" with a small icon at the leading edge, so you can tell at a glance whether to wait or move on. The shimmer runs on Core Animation, which keeps the sweep smooth even while the main thread is busy decoding the rest of the EPG batch.
+
+On Apple TV the grid is a focus-driven UIKit collection view (SwiftUI scroll grids don't render a focusable time grid reliably on tvOS), sharing the same data layer as the phone.
 
 ### Large channel sets
 
@@ -184,7 +183,7 @@ Count the duplicates above.
 
 Hero carousel, two cards visible. Tap the centred play button to resume directly. Tap anywhere else to open detail.
 
-Cross-source: Emby and XC VOD share one rail. The sibling-aware dedup covered above keeps the rail clean when the same title exists in multiple places. The tile flips to whichever version you played most recently, so the artwork you see matches the version that actually plays.
+Cross-source: Emby and XC VOD share one rail. The sibling-aware dedup covered above keeps the rail clean when the same title exists in multiple places. The tile flips to whichever version you played most recently, so the artwork you see matches the version that actually plays. When a new episode drops for a show you're caught up on, it jumps to the front of the rail instead of getting buried behind everything else you watched that week.
 
 ### Custom Rails
 
@@ -208,7 +207,7 @@ First 1000 items per library load immediately. Anything beyond that fills in the
 
 First 100 items paint immediately, next 100 trigger as you scroll near the end. No artificial cap. Spinner sits in the trailing grid cell while the next page loads.
 
-Title sort ignores leading articles. "The Pact" lands under P, not jammed into a wall of "The X" entries. Applies to the Title A→Z / Title Z→A sort and every tie-break that breaks on title (Date Added, Year, Rating).
+Title sort ignores leading articles. "The Pact" lands under P, not jammed into a wall of "The X" entries. Applies to the Title A to Z / Title Z to A sort and every tie-break that breaks on title (Date Added, Year, Rating).
 
 ### Watched state
 
@@ -249,7 +248,7 @@ The Search circle has an 8pt invisible tap-padding extending past the visible ed
 
 <img src="docs/screenshots/tab-bar.png" alt="tab-bar" width="320">
 
-Replaces the system `TabView`. Movies, Series, Live TV, and Settings live in the main pill; Search sits in its own circle to the right. The iOS 26 Liquid Glass tab bar paints a persistent dark band that no SwiftUI or UITabBar API can remove. Apple DTS confirmed as intentional. The custom bar sidesteps this entirely.
+Replaces the system `TabView` on iPhone. Movies, Series, Live TV, and Settings live in the main pill; Search sits in its own circle to the right. The iOS 26 Liquid Glass tab bar paints a persistent dark band that no SwiftUI or UITabBar API can remove. Apple DTS confirmed as intentional. The custom bar sidesteps this entirely. On Apple TV the shell is the system sidebar, focus-driven for the remote.
 
 ### Slide to switch
 
@@ -269,33 +268,46 @@ Hides on scroll-down with a 12pt threshold, restores on any upward scroll. Hides
 
 **Catalog cache.** Full library catalog persisted locally. Cold launch paints from cache in under 2 seconds on 30k+ item libraries.
 
-**Discovery cache.** Snapshot written after each successful load. Tab re-entry renders from cache while a background refresh runs.
+**Discovery cache.** Snapshot written after each successful load. Tab re-entry renders from cache while a background refresh runs. Written with file protection and kept out of iCloud backup, since it holds server-identifying metadata.
 
 **Channel store.** File-backed (UserDefaults isn't built for 70k channels). iCloud snapshot trimmed to user-touched channels only (favorites, hides, pins), so KVS quota doesn't matter.
 
-**Log buffer.** 500-entry actor-based ring buffer for live viewing, backed by an on-disk log that rotates each launch. So if the app restarts unexpectedly, a bug report can carry the previous session's log, the lead-up to whatever happened, not just the fresh one. Both are redacted before they leave the device. Console prints are gated to Debug builds only.
+**Log buffer.** Actor-based ring buffer for live viewing, backed by an on-disk log that rotates each launch. So if the app restarts unexpectedly, a bug report can carry the previous session's log, the lead-up to whatever happened, not just the fresh one. Both are redacted before they leave the device. Console prints are gated to Debug builds only.
 
-**Privacy.** No analytics, no tracking SDK, no third-party crash reporter that phones home. Bug reports go through a Cloudflare Worker that creates GitHub Issues server-side, so the GitHub token never ships in the binary.
+**Privacy.** No analytics, no tracking SDK, no third-party crash reporter that phones home. Bug reports go through a Cloudflare Worker that files GitHub Issues server-side, so no token ships in the binary.
 
 ---
 
 ## Things worth knowing about security
 
-This app holds credentials for servers you don't own: Emby logins, XC subscriptions, M3U URLs, stream tokens. The threat model is closer to a password manager than a typical media app, and it's built that way deliberately.
+This app holds credentials for servers you don't own: Emby and Jellyfin logins, XC subscriptions, M3U URLs, stream tokens. The threat model is closer to a password manager than a typical media app, and it's built that way deliberately.
 
 - **No backend.** Apotheosis talks directly to your servers. There's no Apotheosis-controlled cloud holding anything about you.
 - **No analytics, no tracking SDK, no third-party crash reporter that phones home.** Every dependency that exists in the app is there to render media or talk to your servers, not to phone home about you. This is also a supply-chain control. Anything that phones home is an exfiltration vector for the credentials this app holds.
-- **Credentials live in the Keychain** with the "this device only" accessibility class. Per-profile isolation so a leak from one server doesn't compound across all of them.
-- **TLS posture.** Apple's App Transport Security is enforced for any connection on the public internet: TLS 1.2+ with a valid cert for XC providers and any Emby server reachable from the open web. Self-hosted Emby on a LAN (RFC 1918, link-local, `.local`, loopback) is the common case, so there's a per-profile "allow insecure connection" opt-in for HTTP or self-signed certs on those hosts, with an "Unencrypted" badge on the server row in Settings. Tailscale hosts (`*.ts.net`, the `100.64/10` range) are recognized too, since WireGuard already encrypts the transport. And on first connect Apotheosis records the Emby server's identity, its GUID plus cert fingerprint: a renewed cert gets a one-time notice, but a different server answering at the same address stops and asks before you trust it.
-- **Bug reports redact credentials.** The in-app reporter strips anything that looks like a URL, token, or stored credential before it leaves the device. The pipeline that creates GitHub Issues holds nothing identifying server-side.
+- **Credentials live in the Keychain** with the "this device only" accessibility class. Per-profile isolation so a leak from one server doesn't compound across all of them. iCloud Keychain sync is off unless you turn it on explicitly.
+- **TLS posture.** Apple's App Transport Security is enforced for any connection on the public internet: TLS 1.2+ with a valid cert for XC providers and any server reachable from the open web. Self-hosted Emby on a LAN (RFC 1918, link-local, `.local`, loopback) is the common case, so there's a per-profile "allow insecure connection" opt-in for HTTP or self-signed certs on those hosts, with an "Unencrypted" badge on the server row in Settings. Tailscale hosts (`*.ts.net`, the `100.64/10` range) are recognized too, since WireGuard already encrypts the transport. And on first connect Apotheosis records the server's identity, its GUID plus cert fingerprint: a renewed cert gets a one-time notice, but a different server answering at the same address stops and asks before you trust it.
+- **Bug reports redact credentials.** The in-app reporter strips anything that looks like a URL, token, or stored credential before it leaves the device, for every configured source. The pipeline that files GitHub Issues holds nothing identifying server-side.
 
-The full security spec lives in `CLAUDE.md` at the repo root. If you've ever sideloaded an IPTV app that uploaded your credentials somewhere shady, you'll appreciate the difference.
+The full security spec and how to report a vulnerability privately live in `SECURITY.md`. If you've ever sideloaded an IPTV app that uploaded your credentials somewhere shady, you'll appreciate the difference.
+
+---
+
+## On the roadmap
+
+Not in the current build.
+
+- **Plex.** Its own auth and library model.
+- **Trakt sync.** Cross-device watch history and ratings, bundled with TMDB metadata so XC content gets proper cast and crew.
+- **Multi-server.** More than one Emby server connected at once (XC and M3U too, eventually), each with its own libraries, customizations, and credentials. The per-server settings page is already laid out for it; the storage refactor is the rest.
+- **Multi-profile / household.** v1 is single-user by design. Parental controls and per-profile state (resume, favorites, watch history scoped per profile) land here.
+- **iPad layout pass.** Grid density, rail proportions, and the version-chip row tuned for the larger canvas.
 
 ---
 
 ## Things worth knowing if you read the code
 
 - `ItemKey` is the stable cross-source identity that threads through Resume, Favorites, TrackPreferences, and in-player nav. Don't bypass it.
-- `PlayerControls` is engine-agnostic. The chrome doesn't know whether AVPlayer or VLC is rendering.
+- `PlayerControls` is engine-agnostic. The chrome doesn't care what's decoding underneath.
+- Playback runs on AetherEngine, a vendored FFmpeg-plus-VideoToolbox engine. It demuxes and stream-copies into a loopback HLS feed that AVPlayer plays, which is how the system compositor still gets the original bitstream for real HDR and Dolby Vision.
 - System volume control is a grey-area MPVolumeView path. The fallback to per-player gain is automatic.
 - Setting Emby audio/subtitle indices forces transcode mode. Only emit those parameters on explicit user intent.
