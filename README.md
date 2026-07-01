@@ -2,6 +2,14 @@
 
 Most IPTV clients pretend your personal media library doesn't exist. Most media players don't know what IPTV is. Apotheosis handles both.
 
+<p>
+  <img src="https://img.shields.io/badge/platforms-iOS%20%7C%20iPadOS%20%7C%20tvOS-informational" alt="platforms">
+  <img src="https://img.shields.io/badge/TestFlight-invite--only-blue" alt="TestFlight, invite only">
+  <img src="https://img.shields.io/badge/telemetry-none-brightgreen" alt="no telemetry">
+</p>
+
+![Apotheosis on Apple TV](docs/screenshots/tvos-discovery-hero.png)
+
 One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**, **Xtream Codes IPTV**, and **M3U/XMLTV** as equals: curated discovery, a direct-play player that doesn't transcode your files, and Live TV with a real EPG grid. No backend of its own. Your servers, your data.
 
 > **In TestFlight, invite-only.** [Request access](https://forms.gle/aESrBZQWD4vZjuUA7) or [file a bug](#bugs--feature-requests). Current rough edges are under [Known issues](#known-issues).
@@ -10,14 +18,16 @@ One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**
 
 ## Screenshots
 
+Apple TV and iPhone, the same app.
+
 <table>
   <tr>
-    <td width="50%"><img src="docs/screenshots/continue-watching-hero.png" alt="Continue Watching hero"></td>
-    <td width="50%"><img src="docs/screenshots/epg-grid.png" alt="Live TV EPG grid"></td>
+    <td width="50%"><img src="docs/screenshots/tvos-player-chrome.png" alt="Player on Apple TV"></td>
+    <td width="50%"><img src="docs/screenshots/tvos-epg-grid.png" alt="Live TV guide on Apple TV"></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/screenshots/player-chrome-full.png" alt="Player chrome"></td>
-    <td width="50%"><img src="docs/screenshots/custom-rails-discovery-p1.png" alt="Custom discovery rails"></td>
+    <td width="50%"><img src="docs/screenshots/player-chrome-full.png" alt="Player on iPhone"></td>
+    <td width="50%"><img src="docs/screenshots/continue-watching-hero.png" alt="Continue Watching on iPhone"></td>
   </tr>
 </table>
 
@@ -116,6 +126,12 @@ Apotheosis is a closed-source app, but here's the shape of it. SwiftUI throughou
 
 ---
 
+## Built with
+
+Apotheosis is designed, built, and shipped by [peewee5](https://github.com/peewee5) in close pair-programming with **Claude** (Anthropic). The commit log is the receipt: nearly every commit carries a `Co-Authored-By: Claude` trailer.
+
+Playback runs on **[AetherEngine](https://github.com/superuser404notfound/AetherEngine)** (FFmpeg demux plus a VideoToolbox decode path), which does the direct-play heavy lifting. Thanks also to **[Moonfin](https://github.com/Moonfin-Client/Moonfin-Core)**, an early reference for what a great custom player on tvOS can be.
+
 ## License
 
-Apotheosis is closed-source. It builds on open-source components (the AetherEngine playback engine, FFmpeg, dav1d, and others) under the LGPL and permissive licenses. The full inventory, the license texts, and the LGPL relink offer are in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md).
+Apotheosis is closed-source. It builds on open-source components (AetherEngine, FFmpeg, dav1d, and others) under the LGPL and permissive licenses, with no GPL or nonfree parts. The full inventory, the license texts, and the LGPL relink offer are in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md).
