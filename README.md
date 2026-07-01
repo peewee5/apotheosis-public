@@ -2,124 +2,120 @@
 
 Most IPTV clients pretend your personal media library doesn't exist. Most media players don't know what IPTV is. Apotheosis handles both.
 
-One iOS and tvOS client for **Emby**, **Xtream Codes IPTV**, and **M3U/XMLTV**. Curated discovery, a full custom player, and Live TV with a proper EPG grid. No backend of its own. Your servers, your data.
+One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**, **Xtream Codes IPTV**, and **M3U/XMLTV** as equals: curated discovery, a direct-play player that doesn't transcode your files, and Live TV with a real EPG grid. No backend of its own. Your servers, your data.
 
-> **In TestFlight now, invite-only.** Round one is small and going out to trusted testers. [Request access](https://forms.gle/aESrBZQWD4vZjuUA7) or [file a bug](#bugs--feature-requests).
+> **In TestFlight, invite-only.** [Request access](https://forms.gle/aESrBZQWD4vZjuUA7) or [file a bug](#bugs--feature-requests). Current rough edges are under [Known issues](#known-issues).
 
 ---
 
-## What it looks like
+## Screenshots
 
-See [`FEATURES.md`](FEATURES.md) for annotated screenshots: discovery, the EPG grid, the player chrome, and the version-sibling dedup shown side by side against Infuse.
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/continue-watching-hero.png" alt="Continue Watching hero"></td>
+    <td width="50%"><img src="docs/screenshots/epg-grid.png" alt="Live TV EPG grid"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/player-chrome-full.png" alt="Player chrome"></td>
+    <td width="50%"><img src="docs/screenshots/custom-rails-discovery-p1.png" alt="Custom discovery rails"></td>
+  </tr>
+</table>
+
+More, annotated, in [`FEATURES.md`](FEATURES.md), including the version-sibling dedup shown side by side against Infuse.
 
 ---
 
 ## Why it exists
 
-There's a gap in the market that nothing fills well. Infuse is the best personal media client available, but it barely tolerates IPTV. Pure IPTV apps (TiviMate, IPTV Smarters) don't know Emby exists. If you run both, you're either switching apps constantly or settling for a client that does one thing well and the other badly.
+There's a gap nothing fills well. Infuse is the best personal media client available, but it barely tolerates IPTV. Pure IPTV apps (TiviMate, IPTV Smarters) don't know Emby exists. Run both and you're either switching apps constantly or living with a client that does one thing well and the other badly.
 
-Apotheosis treats Emby and XC IPTV as first-class peers. Continue Watching works across both. Favorites sync across both. One player, one library, one tab bar.
+Apotheosis treats your library and your IPTV as first-class peers. Continue Watching works across both. Favorites sync across both. One player, one library, one tab bar, on the phone in your pocket and the TV on your wall.
 
 ---
 
 ## Sources
 
-**Emby**: direct login and Emby Connect. Full library browsing, Continue Watching with resume position, two-way Favorites sync, playback reporting, version chips for multi-encode libraries (1080p and 4K show as one poster with resolution chips, not two entries).
+**Emby**: direct login and Emby Connect. Full library browsing, Continue Watching with resume, two-way Favorites sync, playback reporting, and version chips for multi-encode libraries (1080p and 4K show as one poster with resolution chips, not two entries).
+
+**Jellyfin** (early support): add a server from the same screen as Emby. The app detects which one you're connecting to and reuses the Emby path, so browsing, Continue Watching, and playback work the same way. Still being road-tested.
 
 **Xtream Codes (XC) IPTV**: VOD, Series, and Live TV. Account expiry and connection status in Settings. Favorites synced to iCloud so they survive reinstalls.
 
-**M3U + XMLTV**: paste a playlist URL. Handles 70k+ channel playlists with CRLF line endings, file-backed storage to bypass the UserDefaults 4 MB cap, XMLTV EPG matched by tvg-id.
+**M3U + XMLTV**: paste a playlist URL. Handles 70k+ channel playlists with CRLF line endings, file-backed storage to get past the UserDefaults 4 MB cap, and XMLTV EPG matched by tvg-id.
+
+Plex is on the roadmap.
 
 ---
 
 ## Player
 
-Dual-engine: AVPlayer for HLS and native Apple formats, MobileVLCKit for MKV, AVI, FLV, raw MPEG-TS, and anything AVPlayer won't touch. If AVPlayer fails to start, it falls back to VLC automatically.
+One direct-play engine across iPhone, iPad, and Apple TV. It demuxes with FFmpeg and hands decoding to Apple's VideoToolbox, so 4K HDR, HEVC 10-bit, MKV, and raw MPEG-TS play with no transcoding and no server re-encode. AVPlayer handles HLS and AirPlay and stands in as a fallback.
 
-Volume control writes to actual system volume (hardware buttons update the on-screen HUD in real time). Brightness drag adjusts screen brightness without leaving the player. Both work on live and VOD.
+That matters most on Apple TV, where AVPlayer on its own can't reliably play those formats. The chrome, skip markers, auto-play-next, and in-player episode picker are the same on all three platforms.
 
-Skip Intro and Skip Credits auto-surface when the playhead enters a marked region, even if the chrome is hidden. Great for the anime cold-open case where you'd otherwise have to tap to surface the chrome first. Today the markers come from Emby chapters named "Intro" or "Outro" (typically populated by the Chapter Markers plugin) or from hand-curated entries. Native Emby Premiere intro detection and Jellyfin's Intro Skipper plugin endpoint are on the roadmap.
+Volume control writes to the actual system volume (the hardware buttons move the on-screen HUD in real time). A brightness drag adjusts the screen without leaving the player. Both work on live and VOD.
 
-Mini player keeps the engine alive while you browse. Compact dock mode collapses everything to a single pill when you scroll down so the tab bar and player controls don't fight for space.
+Skip Intro and Skip Credits surface on their own when the playhead enters a marked region, even with the chrome hidden, so the anime cold-open case doesn't make you tap to reveal the controls first. Markers come from the server where it exposes them.
+
+The mini player keeps playback alive while you browse, and a compact dock mode collapses it to a single pill when you scroll so the tab bar and the player controls stop fighting for room. On iPhone and iPad, Picture in Picture hands off to the system and can drop the app to the home screen, Infuse-style.
 
 ---
 
 ## Live TV
 
-EPG grid with sticky channel column, horizontal time scroll, and a current-time indicator that tracks the centre. XMLTV and XC EPG both populate it. 800ms jitter on individual EPG fetches prevents rate-limiting on the initial burst against XC servers.
+An EPG grid with a sticky channel column, horizontal time scroll, and a now-line that tracks the centre. XMLTV and XC EPG both fill it, with a little jitter on the opening fetch burst so an XC server doesn't rate-limit you out of the gate.
 
-Categories past ~1,500 channels swap the grid for a searchable list or card browser, so a 30k-channel reseller dump stays smooth and searchable instead of choking. Drop back to a normal-sized category and the guide returns on its own.
+Categories past ~1,500 channels swap the grid for a searchable list, so a 30k-channel reseller dump stays smooth instead of choking. Drop back to a normal-sized category and the guide comes back on its own.
 
-Quick Chips above the category menu: pin channels or categories for one-tap access. Prev/next channel buttons in-player replace the seek controls on live streams. Navigation is in-place with no dismiss animation.
+Quick Chips above the category menu pin channels or categories for one-tap access. In the player, prev/next channel buttons replace the seek controls on a live stream, and navigation stays in place with no dismiss animation.
 
 ---
 
 ## Discovery
 
-Continue Watching surfaces the most recently played item for both Emby and XC VOD. Emby items store under canonical and direct keys so version siblings (1080p/4K) share the same CW tile correctly. Mark as Watched clears the tile immediately without waiting for a server round trip.
+Continue Watching surfaces the most recent item across every connected source. Version siblings (1080p/4K) share one tile instead of doubling up, and Mark as Watched clears the tile right away without waiting on the server.
 
-Custom Rails let you compose filter rails from 11 axes: genre, decade, source, person (autocomplete against Emby's cast data), rating floor, resolution, watched state, recency, studio, audio language, and curated source (Emby BoxSets or Playlists). Up to several rails per tab, each rendered above the source-primary rails.
+Custom Rails compose filter rails from a dozen axes: genre, decade, source, person (autocomplete against cast data), rating floor, resolution, watched state, recency, studio, audio language, and curated source (Emby BoxSets or Playlists). Each renders above the source's own rails.
 
-See All views paginate incrementally: first 100 items on load, next 100 triggered as you scroll near the end. No artificial cap, so 30k-item libraries load without freezing.
+See All views paginate as you scroll, 100 at a time with no artificial cap, so a 30k-item library loads without freezing.
 
 ---
 
-## Platform details
+## Privacy & Security
 
-- iOS 18+ and tvOS 18+. SwiftUI throughout. `@Observable` viewmodels, no `ObservableObject`.
-- XcodeGen: `project.yml` is the source of truth, `.xcodeproj` is gitignored.
-- MobileVLCKit via Swift Package Manager.
-- Privacy manifest declares `NSPrivacyTracking: false`. No analytics, no tracking SDK, no third-party telemetry. In-app bug reports go through a Cloudflare Worker that creates GitHub Issues; the GitHub token never ships in the binary.
+Apotheosis holds credentials for servers you control, and it treats them like it. They live in the iOS Keychain, this-device-only by default, and never leave the device except to the server they belong to. There is no analytics, no tracking SDK, and no telemetry of any kind. In-app bug reports redact server URLs, hosts, credentials, and stream URLs on the device before anything is sent.
+
+Full policy, scope, and how to report a vulnerability privately: [`SECURITY.md`](SECURITY.md).
+
+---
+
+## Known issues
+
+Being actively worked on:
+
+- **Apple TV: the player doesn't resume after an app switch.** Background the player through the app switcher, come back, and playback won't pick up. Back out and reopen for now. Fix identified.
+- **Rare glitching on some broadcast-sourced files.** A small class of non-standard encodes (typically DVR or broadcast captures) can artifact. Diagnosed, fix planned.
+- **Live TV can take a few seconds to settle** at startup, occasionally with brief audio/video sync drift that corrects itself.
+- **Some live streams stall on first play** now and then (a provider-side network quirk); the player auto-retries and usually recovers.
+- **iPad uses the iPhone layout** for now. Its own pass is coming.
+- **Subtitles can take a moment to appear** the first time you turn them on for a large remote file.
 
 ---
 
 ## Bugs + Feature Requests
 
-File issues and feature requests at [apotheosis-public](https://github.com/peewee5/apotheosis-public), or submit directly from the app (Settings > Bug Report / Feature Request). In-app reports attach a filtered log excerpt automatically, and if the app restarted unexpectedly they carry the previous session's log too, so the lead-up to a crash isn't lost.
+File issues here on [apotheosis-public](https://github.com/peewee5/apotheosis-public), or send one from the app (Settings > Bug Report / Feature Request). In-app reports attach a filtered log excerpt, and if the app restarted unexpectedly they carry the previous session's log too, so the lead-up to a crash isn't lost.
 
-Don't paste server URLs, credentials, or stream URLs into bug reports. The in-app reporter redacts them; the GitHub form doesn't.
-
----
-
-## Build from source
-
-You'll need Xcode 16+, [XcodeGen](https://github.com/yonaskolb/XcodeGen), and an Apple Developer account for on-device builds. Simulator works without one.
-
-```sh
-brew install xcodegen
-git clone <repo>
-cd media
-xcodegen generate
-open Apotheosis.xcodeproj
-```
-
-Pick `Apotheosis-iOS` or `Apotheosis-tvOS` and run. Re-run `xcodegen generate` after pulling if new Swift files were added.
-
-```sh
-# CLI build (iOS Simulator)
-xcodebuild -scheme Apotheosis-iOS \
-  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
-  build
-```
+Don't paste server URLs, credentials, or stream URLs into a report. The in-app reporter redacts them; the GitHub form does not.
 
 ---
 
-## Architecture (brief)
+## Under the hood
 
-```
-App/            entry point, tab bar, player wiring
-Features/       Movies, Series, LiveTV, Playback, Settings
-Sources/        Emby, XC, M3U clients and models
-Core/           models, networking, storage, logger
-Theme/          shared UI components
-```
-
-Key patterns: `ItemKey` gives stable cross-source identity (`emby:serverKey:itemId`, `xc:live:-N`) that threads through resume, favorites, track preferences, and in-player navigation. `PlayerControls` is engine-agnostic state shared by AVPlayer and VLC chrome so the UI doesn't care which engine is active.
+Apotheosis is a closed-source app, but here's the shape of it. SwiftUI throughout, `@Observable` view models, iOS 18+ and tvOS 18+. A single `ItemKey` gives every title a stable identity across sources (`emby:serverKey:itemId`, `xc:live:-N`) that threads through resume, favorites, track preferences, and in-player navigation, which is what lets Continue Watching and Favorites work as one list instead of four. Playback runs on a vendored engine (AetherEngine: FFmpeg demux plus a VideoToolbox decode path) behind engine-agnostic controls, so the chrome doesn't care what's decoding underneath.
 
 ---
 
-## Known limitations
+## License
 
-- tvOS compiles and plays, but the interaction layer is built for touch, so it's a port rather than a layout tweak. Post-beta work. iPad layout is iPhone-tuned for now and gets its pass sooner.
-- System volume control uses a grey-area MPVolumeView path. If Apple closes it in a future iOS update, the chrome falls back to per-player gain automatically.
-- Plex and Jellyfin are on the post-v1 roadmap. Not in beta.
+Apotheosis is closed-source. It builds on open-source components (the AetherEngine playback engine, FFmpeg, dav1d, and others) under the LGPL and permissive licenses. The full inventory, the license texts, and the LGPL relink offer are in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md).
