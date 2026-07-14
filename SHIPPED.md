@@ -2,6 +2,22 @@
 
 A running log of what's changed, newest first. If you're on a TestFlight build and want to know what to look for, start here.
 
+## 0.9.0 (5) · 2026-07-01
+
+**Apple TV joins the beta, and so do Jellyfin and Plex servers.**
+
+This is the big one. Apotheosis is now a tvOS app as well as an iPhone and iPad app, built from the ground up for the remote rather than ported from touch. Same TestFlight build, same Universal Purchase, so installing on Apple TV costs nothing extra. Two new server types come along for the ride.
+
+- **Apple TV.** Discovery, library grids, search, detail pages, Settings, and a full Live TV guide, all focus-driven for the remote. Sign in on your iPhone and push the connection to the Apple TV (no typing server URLs with the on-screen keyboard).
+- **A player that direct-plays your files on Apple TV.** 4K HDR, HEVC 10-bit, and MKV play without transcoding, off both Emby and IPTV. Auto-play-next for binges and an in-player episode picker are built in.
+- **Plex.** Sign in with your Plex account and browse your movie and TV libraries. Continue Watching picks up right alongside Emby and IPTV, and you get the same detail pages, cast rail, and direct-play player as every other source. (Plex Live TV/DVR and Favorites sync are still to come.)
+- **Jellyfin.** Add a Jellyfin server from the same Media Server screen as Emby. The app detects which one you're connecting to. This is early support, so kick the tires and report anything off.
+- Series version switching no longer trips over itself when a show has more than one copy, and it keeps your place in the episode when you switch.
+- "Couldn't load episodes" now offers a Retry instead of a dead end (Emby and Plex).
+- Seeking on large 4K files is steadier, with a recovery path if the stream stalls mid-scrub.
+- "See All" on a huge library loads in pages as you scroll instead of trying to render everything at once.
+- Switching between servers no longer leaves the previous server's artwork lingering on the home screen.
+
 ## 0.9.0 (4) · 2026-06-01
 
 **Live TV navigation rebuilt for the real world of massive IPTV playlists.**

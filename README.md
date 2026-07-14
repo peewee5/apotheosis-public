@@ -123,6 +123,12 @@ Being actively worked on:
 
 ---
 
+## Release Notes
+
+[`SHIPPED.md`](SHIPPED.md) has what's new in each TestFlight build, in plain language. [`CHANGELOG.md`](CHANGELOG.md) covers the same builds in a stricter [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
+
+---
+
 ## Bugs + Feature Requests
 
 File issues here on [apotheosis-public](https://github.com/peewee5/apotheosis-public), or send one from the app (Settings > Bug Report / Feature Request). In-app reports attach a filtered log excerpt, and if the app restarted unexpectedly they carry the previous session's log too, so the lead-up to a crash isn't lost.
