@@ -7,10 +7,9 @@ is `MARKETING_VERSION (CURRENT_PROJECT_VERSION)` — a marketing version plus a 
 number that increments with every TestFlight cut, not strict Semantic Versioning (this
 is a beta client app distributed via TestFlight, not a versioned library or API).
 
-Primary headings stay Added / Changed / Fixed / Security. On larger cuts, bullets are
-grouped under area subheads (Playback, Live TV, Discovery, Library, Settings, Docs) —
-same spirit as the backlog buckets, without replacing the change-type axis. Thin cuts
-skip the subheads.
+Headings stay Added / Changed / Fixed / Security. Optional area tag at the end of a
+bullet (`_(Playback)_`, `_(Live TV)_`, `_(Discovery)_`, `_(Library)_`, `_(Settings)_`,
+`_(Docs)_`) — skim aid only; skip on thin cuts.
 
 See also [`SHIPPED.md`](SHIPPED.md).
 
@@ -26,107 +25,82 @@ _Draft for 0.9.0 (7) — landed on `main` after Build 6 shipped to TestFlight._
 
 ### Added
 
-#### Playback
-
 - Player chrome consolidation on iPhone and Apple TV: Tracks / Navigate / More (chapters
-  live under Navigate, not buried in gear).
-
-#### Library
-
+  live under Navigate, not buried in gear). _(Playback)_
 - Trakt layer-1: device OAuth + Keychain storage + DEBUG Connect (full history sync still
-  upcoming). Honors Trakt `slow_down` with capped backoff while polling.
+  upcoming). Honors Trakt `slow_down` with capped backoff while polling. _(Library)_
 
 ### Fixed
 
-#### Playback
-
 - Text subtitles no longer sit mid-screen over the playback controls when chrome is up.
+  _(Playback)_
 - Skip Intro control cleared above the bottom chrome cluster after consolidation.
-
-#### Live TV
-
+  _(Playback)_
 - Host now consumes AetherEngine `liveSourceReset` and falls back to HLS AVPlayer when a
   live producer wedges (SSAI / no-cut stall class). Zap-fence so a disappearing player
-  cannot start a late recovery.
-
-#### Discovery
-
+  cannot start a late recovery. _(Live TV)_
 - Favorites See-All: first-paint parity, toast-only load-more, stable Emby page order
-  (no scramble while paging).
-- Emby See-All / library sort: UI order threaded into server pagination.
+  (no scramble while paging). _(Discovery)_
+- Emby See-All / library sort: UI order threaded into server pagination. _(Discovery)_
 
 ### Changed
 
-#### Playback
-
-- iOS player chrome edge insets retuned on device (horizontal inset 40).
-
-#### Docs
-
-- Docs / screenshots refresh for FEATURES and README (public mirror).
+- iOS player chrome edge insets retuned on device (horizontal inset 40). _(Playback)_
+- Docs / screenshots refresh for FEATURES and README (public mirror). _(Docs)_
 
 ## [0.9.0] - Build 6 - 2026-07-17
 
 ### Added
 
-#### Playback
-
 - Crowd Skip Intro / Credits lookup: TheIntroDB + IntroDB.app fallback (opt-in under
-  Playback), wired for Emby and Plex direct-play.
+  Playback), wired for Emby and Plex direct-play. _(Playback)_
 - Custom scrub bar (gesture-driven) with grow-on-touch feedback; tap-to-seek no longer
-  swallowed by a no-op Slider drag.
-- Sidecar subtitle decode capped at 1 MB (network and local paths).
-
-#### Discovery
-
+  swallowed by a no-op Slider drag. _(Playback)_
+- Sidecar subtitle decode capped at 1 MB (network and local paths). _(Playback)_
 - Optional TMDB online enrichment (BYOK): clear logos, cast, episode metadata, and hero
-  backfill when server artwork is thin.
+  backfill when server artwork is thin. _(Discovery)_
 - Artwork cache controls; decoded-bitmap cache for warm Movies ↔ Series tab switches.
+  _(Discovery)_
 
 ### Fixed
 
-#### Playback
-
 - VOD scrub / seek restart storm that could end in `NSURLErrorDomain -1008` and a stuck
   paused player — AetherEngine A10 bounded teardown-rebuild (see From in-app reports).
+  _(Playback)_
 - Emby movie chapters hydrate on Continue Watching, long-press / library Play, discovery
   hero Play, and Search — not only detail-page Play after `itemDetails` settles.
-- Chapters load-order race on iOS detail Play (generation-fenced).
+  _(Playback)_
+- Chapters load-order race on iOS detail Play (generation-fenced). _(Playback)_
 - Player options panel: Orientation chips no longer overlap Subtitle Style; chip rows
-  and Mute / Chapters / Subtitle Style rows left-align with panel content.
-- Interlaced H.264 routed to the software decode path (deinterlace).
+  and Mute / Chapters / Subtitle Style rows left-align with panel content. _(Playback)_
+- Interlaced H.264 routed to the software decode path (deinterlace). _(Playback)_
 - Auto-mark-watched leaving a stale Emby resume point; series auto-mark threshold 90%.
-
-#### Discovery
-
+  _(Playback)_
 - Discovery re-entry no longer shows a loading spinner over already-cached Movies /
-  Series rails (including Plex / XC-category rails).
+  Series rails (including Plex / XC-category rails). _(Discovery)_
 - Clear-logo flash / revert / SVG-undecodable TMDB logos; URL-cascade fallback
-  (TMDB → Emby → text).
+  (TMDB → Emby → text). _(Discovery)_
 - tvOS focus: sidebar tab-reselect pops to root; CW-rail / hero focus steals and
-  backdrop flash on warm tab switches; detail action cluster redesign.
+  backdrop flash on warm tab switches; detail action cluster redesign. _(Discovery)_
 - Series poster title/year display; Search casing/stills; genre counting and dead keys;
   custom-rail See-All source / axis parity; "On Demand" rail mixing sources.
+  _(Discovery)_
 - Detail-page plain-text title fallbacks use title casing (including tvOS Plex series).
+  _(Discovery)_
 
 ### Changed
 
-#### Discovery
-
 - Warm Movies ↔ Series tab switches reuse decoded poster/hero bitmaps via an in-memory
-  `CachedAsyncImage` cache (Clear Artwork Cache still clears it).
-- Custom rails cache `customRailItems` to cut tab-switch body cost.
-
-#### Settings
-
+  `CachedAsyncImage` cache (Clear Artwork Cache still clears it). _(Discovery)_
+- Custom rails cache `customRailItems` to cut tab-switch body cost. _(Discovery)_
 - tvOS Settings / About polish (Report an Issue or Idea; Quick Diagnostic at bottom of
-  About; Media Server Plex link copy).
-- Bug-report free-text shows a §4.4 credential-paste reminder.
+  About; Media Server Plex link copy). _(Settings)_
+- Bug-report free-text shows a §4.4 credential-paste reminder. _(Settings)_
 
 ### From in-app reports
 
 - [VOD scrub seek freeze (stuck paused)](https://github.com/peewee5/apotheosis-public/issues/23)
-  — fixed by AetherEngine A10 bounded teardown-rebuild.
+  — fixed by AetherEngine A10 bounded teardown-rebuild. _(Playback)_
 
 ## [0.9.0] - Build 5 - 2026-07-01
 
