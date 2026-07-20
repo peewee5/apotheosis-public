@@ -34,8 +34,6 @@ One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**
   <img src="docs/screenshots/tvos-discovery-hero.png" alt="Discovery hero on Apple TV" width="720">
 </p>
 
-Apple TV discovery hero — full-bleed backdrop, clear logo, action cluster. Player chrome, Live TV, connections, and more in [`FEATURES.md`](FEATURES.md).
-
 <p>
 <img src="docs/screenshots/tvos-library-grid.png" alt="Library grid on Apple TV" width="49%">
 <img src="docs/screenshots/tvos-series-detail.png" alt="Series detail on Apple TV" width="49%">
@@ -45,6 +43,8 @@ Apple TV discovery hero — full-bleed backdrop, clear logo, action cluster. Pla
 <img src="docs/screenshots/continue-watching-hero.png" alt="Continue Watching on iPhone" width="49%">
 <img src="docs/screenshots/live-player-channel-nav.png" alt="Live TV player with channel nav on iPhone" width="49%">
 </p>
+
+<p align="center"><em>Apple TV discovery — full-bleed backdrop, clear logo, Play / Favorite / Info cluster.</em> More in [`FEATURES.md`](FEATURES.md).</p>
 
 ---
 
