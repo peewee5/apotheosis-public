@@ -2,6 +2,17 @@
 
 A running log of what's changed, newest first. If you're on a TestFlight build and want to know what to look for, start here.
 
+## 0.9.0 (6) · 2026-07-17
+
+**Faster home switching, reliable Emby chapters, and a tidier player options panel.**
+
+- **Tab switching feels snappier.** Posters and hero artwork stay decoded in memory, so bouncing between Movies and Series no longer waits on a full re-decode every time.
+- **Discovery no longer flashes a spinner** when you return to Movies or Series after a quiet stretch — cached rails stay on screen while a background refresh runs.
+- **Emby chapters show up from every Play path** that should have them: detail Play, Continue Watching, long-press Play, library / See All / Collections / Playlists, and Search. If a title has chapter markers on the server, the Chapters row should appear in the player options panel.
+- **Player options panel layout.** Orientation chips no longer overlap Subtitle Style; Speed / Orientation chips (and Mute / Chapters / Subtitle Style) sit left-aligned with the rest of the panel.
+- **Detail titles capitalize correctly** when a show or movie has no clear logo and falls back to plain text.
+- Smaller Settings / About copy polish on Apple TV (Report an Issue or Idea; Quick Diagnostic moved to the bottom of About).
+
 ## 0.9.0 (5) · 2026-07-01
 
 **Apple TV joins the beta, and so do Jellyfin and Plex servers.**

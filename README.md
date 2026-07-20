@@ -30,7 +30,11 @@ One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**
 
 ## Screenshots
 
-The Live TV guide and Settings on Apple TV; the mini-player dock and custom tab bar on iPhone.
+<p align="center">
+  <img src="docs/screenshots/tvos-discovery-hero.png" alt="Discovery hero on Apple TV" width="720">
+</p>
+
+Apple TV discovery hero — full-bleed backdrop, clear logo, action cluster. Live TV guide, player chrome, detail pages, and more in [`FEATURES.md`](FEATURES.md).
 
 <table>
   <tr>
@@ -41,8 +45,6 @@ The Live TV guide and Settings on Apple TV; the mini-player dock and custom tab 
     <td width="50%"><img src="docs/screenshots/tab-bar.png" alt="Custom tab bar on iPhone"></td>
   </tr>
 </table>
-
-More in [`FEATURES.md`](FEATURES.md).
 
 ---
 
@@ -56,7 +58,7 @@ Apotheosis treats your library and your IPTV as first-class peers. Continue Watc
 
 ## Sources
 
-**Emby**: direct login and Emby Connect. Full library browsing, Continue Watching with resume, two-way Favorites sync, playback reporting, and version chips for multi-encode libraries (1080p and 4K show as one poster with resolution chips, not two entries).
+**Emby**: direct login and Emby Connect. Full library browsing, Continue Watching with resume, two-way Favorites sync, playback reporting, and a version picker for multi-encode libraries (1080p and 4K show as one poster, not two entries).
 
 **Jellyfin** (early support): add a server from the same screen as Emby. The app detects which one you're connecting to and reuses the Emby path, so browsing, Continue Watching, and playback work the same way. Still being road-tested.
 

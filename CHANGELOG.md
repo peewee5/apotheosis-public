@@ -13,6 +13,27 @@ categorized format.
 
 ## [Unreleased]
 
+## [0.9.0] - Build 6 - 2026-07-17
+
+### Fixed
+
+- Emby movie chapters now hydrate on Continue Watching, long-press / library Play,
+  discovery hero Play, and Search — not only detail-page Play after `itemDetails`
+  settles.
+- Discovery re-entry no longer shows a loading spinner over already-cached Movies /
+  Series rails while a background refresh runs.
+- Player options panel: Orientation chips no longer overlap Subtitle Style; chip rows
+  and Mute / Chapters / Subtitle Style rows left-align with panel content.
+- Detail-page plain-text title fallbacks (no clear logo) use title casing, including
+  the tvOS Plex series surface.
+
+### Changed
+
+- Warm Movies ↔ Series tab switches reuse decoded poster/hero bitmaps via an in-memory
+  `CachedAsyncImage` cache (Clear Artwork Cache still clears it).
+- tvOS About: "Report an Issue or Idea" copy; Submit Quick Diagnostic moved to the
+  bottom of the list.
+
 ## [0.9.0] - Build 5 - 2026-07-01
 
 ### Added
