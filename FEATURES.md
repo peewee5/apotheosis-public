@@ -185,6 +185,24 @@ Audio and subtitle preferences carry across episodes of the same series. Set Spa
 
 Fires at 95% of runtime, settings toggle, default on. Matches VidHub's behaviour.
 
+### Custom tab bar
+
+<img src="docs/screenshots/tab-bar.png" alt="Custom tab bar on iPhone" width="320">
+
+Replaces the system `TabView`. Movies, Series, Live TV, and Settings live in the main pill; Search sits in its own circle to the right. The iOS 26 Liquid Glass tab bar paints a persistent dark band that no SwiftUI or UITabBar API can remove. Apple DTS confirmed as intentional. The custom bar sidesteps this entirely.
+
+### Slide to switch
+
+Drag horizontally across the tab bar to glide between tabs. Light haptic per crossing. Tooltip swaps to the hovered tab's label immediately.
+
+### Pop to root
+
+Tap the active tab to pop back to its discovery view. Works for any push (drill-downs, See All, library views), regardless of how they were added.
+
+### Tab bar behaviour
+
+Hides on scroll-down with a 12pt threshold, restores on any upward scroll. Hides on drill-down pages where the active surface doesn't need tab context.
+
 ---
 
 ## Live TV
@@ -400,28 +418,6 @@ The sidebar of tabs collapses into the content once you pick one. The Menu butto
 <img src="docs/screenshots/tvos-settings-playback.png" alt="tvos-settings-playback" width="480">
 
 Full-screen two-pane layout: branding / section explainer on the left, focusable rows on the right. Root Settings (Connections, Library, Live TV, Playback, Sync, About…) drills into the same two-pane shape for Library, Playback, and the other categories. About has a GitHub Sponsors QR, "Report an Issue or Idea" (QR to the public tracker), and a redacted in-app quick diagnostic (Submit Quick Diagnostic sits at the bottom of About).
-
----
-
-## Navigation
-
-### Custom tab bar
-
-<img src="docs/screenshots/tab-bar.png" alt="tab-bar" width="320">
-
-Replaces the system `TabView`. Movies, Series, Live TV, and Settings live in the main pill; Search sits in its own circle to the right. The iOS 26 Liquid Glass tab bar paints a persistent dark band that no SwiftUI or UITabBar API can remove. Apple DTS confirmed as intentional. The custom bar sidesteps this entirely.
-
-### Slide to switch
-
-Drag horizontally across the tab bar to glide between tabs. Light haptic per crossing. Tooltip swaps to the hovered tab's label immediately.
-
-### Pop to root
-
-Tap the active tab to pop back to its discovery view. Works for any push (drill-downs, See All, library views), regardless of how they were added.
-
-### Tab bar behaviour
-
-Hides on scroll-down with a 12pt threshold, restores on any upward scroll. Hides on drill-down pages where the active surface doesn't need tab context.
 
 ---
 
