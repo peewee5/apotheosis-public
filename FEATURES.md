@@ -4,7 +4,11 @@ iOS + tvOS client. Emby, Jellyfin, Plex, Xtream Codes, and M3U/XMLTV behind one 
 
 What you get: a 70k-channel EPG that doesn't choke, Continue Watching that merges across every source you've connected, and dedup that treats your 4K and 1080p copies of the same film as one tile. Direct-play MKV / HEVC / 4K HDR on phone and Apple TV through AetherEngine. Optional TMDB enrichment for clear logos and cast when your server's artwork is thin. A Worker-backed bug reporter that holds nothing about you, and security posture closer to a password manager than a typical media app.
 
-<img src="docs/screenshots/tvos-discovery-hero.png" alt="tvos-discovery-hero" width="720">
+<p align="center">
+  <img src="docs/screenshots/tvos-discovery-hero.png" alt="Discovery hero on Apple TV" width="720">
+</p>
+
+<p align="center"><em>Apple TV discovery — full-bleed backdrop, clear logo, Play / Favorite / Info cluster.</em></p>
 
 ---
 
