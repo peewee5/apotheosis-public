@@ -44,7 +44,7 @@ One client for **iPhone, iPad, and Apple TV** that treats **Emby**, **Jellyfin**
 <img src="docs/screenshots/live-player-channel-nav.png" alt="Live TV player with channel nav on iPhone" width="49%">
 </p>
 
-<p align="center"><em>Apple TV discovery — full-bleed backdrop, clear logo, Play / Favorite / Info cluster.</em> More in [`FEATURES.md`](FEATURES.md).</p>
+<p align="center"><em>Apple TV discovery — full-bleed backdrop, clear logo, Play / Favorite / Info cluster.</em> More in <a href="FEATURES.md">FEATURES.md</a>.</p>
 
 ---
 
