@@ -250,15 +250,14 @@ Prev/next channel buttons replace seek controls on live streams. Order follows t
 
 ### Sibling versioning
 
-| **Apotheosis** | **Infuse** |
-|:---:|:---:|
-| <img src="docs/screenshots/sibling-dedup-apotheosis.png" alt="Same library shown in Apotheosis with version siblings collapsed" width="280"> | <img src="docs/screenshots/sibling-dedup-infuse.png" alt="Same library shown in Infuse with every version listed separately" width="280"> |
+<p>
+<img src="docs/screenshots/sibling-dedup-collapsed.png" alt="Same library with version siblings collapsed to one tile" width="49%">
+<img src="docs/screenshots/sibling-dedup-listed.png" alt="Same library with every encode listed as its own tile" width="49%">
+</p>
 
-Multi-encode libraries are common in IPTV-plus-personal-server setups. Your Emby has separate 4K and 1080p folders. Your IPTV provider lists the same movie at three resolutions. Most clients show all of them, so the same title sprawls across rails, fills CW with duplicates, and ends up with a watched checkmark that only applies to one variant.
+Multi-encode libraries are common in IPTV-plus-personal-server setups. Your Emby has separate 4K and 1080p folders. Your IPTV provider lists the same movie at three resolutions. Left alone, that same title sprawls across rails, fills Continue Watching with duplicates, and ends up with a watched checkmark that only applies to one variant.
 
 Apotheosis collapses them into a single tile across every grid, every CW rail, every search result. The detail page version picker (iOS list under Play; Apple TV Version panel) lets you switch encodes. The CW play button respects whichever you picked last, and marking either version watched clears both. Server data is untouched; the dedup is purely client-side, so your Emby web client still sees each version separately if that's how you want to browse there.
-
-Count the duplicates above.
 
 ### Continue Watching
 
