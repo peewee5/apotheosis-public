@@ -269,9 +269,10 @@ Cross-source: Emby, Plex, and XC VOD share one rail. The sibling-aware dedup cov
 
 ### Custom Rails
 
-<img src="docs/screenshots/custom-rails-discovery-p1.png" alt="custom-rails-discovery-p1" width="320">
-
-<img src="docs/screenshots/custom-rails-discovery-p2.png" alt="custom-rails-discovery-p2" width="320">
+<p>
+<img src="docs/screenshots/custom-rails-discovery-p1.png" alt="Custom Rails on discovery" width="49%">
+<img src="docs/screenshots/custom-rails-discovery-p2.png" alt="Custom Rails filter axes" width="49%">
+</p>
 
 Composable filter rails on the discovery screen. 11 axes available: genre, decade, source, person, rating floor, resolution, watched state, recency, studio, audio language, and curated source (Emby BoxSets or Playlists).
 
@@ -290,17 +291,19 @@ Same title on Apple TV — enrichment off, then on. What changes is the fill-in:
 
 ### Detail pages
 
-<img src="docs/screenshots/movie-detail.png" alt="movie-detail" width="320">
-
-<img src="docs/screenshots/series-detail.png" alt="series-detail" width="320">
+<p>
+<img src="docs/screenshots/movie-detail.png" alt="Movie detail with version list" width="49%">
+<img src="docs/screenshots/series-detail.png" alt="Series detail with season chips and episode rail" width="49%">
+</p>
 
 Movie detail with the version list open under Play (4K / HD), plus overview and cast. Series detail adds season chips and an episode rail (selected episode highlighted). Apple TV variants below.
 
 ### Genre, Favorites, Collections, Playlists, Recently Added
 
-<img src="docs/screenshots/favorites-see-all.png" alt="favorites-see-all" width="320">
-
-<img src="docs/screenshots/collections-grid.png" alt="collections-grid" width="320">
+<p>
+<img src="docs/screenshots/favorites-see-all.png" alt="Favorites See All grid" width="49%">
+<img src="docs/screenshots/collections-grid.png" alt="Collections grid" width="49%">
+</p>
 
 Nav chips above the rails, each opens a full grid with sort overrides, source filtering, and genre filtering. Genre chips come from your library's actual tags, sorted by item count descending. Synonym folding (e.g. Kids / Children / Children's → Family) keeps the chip list sane.
 
@@ -332,9 +335,10 @@ Discovery snapshots paint on tab re-entry while a background refresh runs, so yo
 
 ## Search
 
-<img src="docs/screenshots/search-tab.png" alt="search-tab" width="320">
-
-<img src="docs/screenshots/tvos-search-tab.png" alt="tvos-search-tab" width="480">
+<p>
+<img src="docs/screenshots/search-tab.png" alt="Search on iPhone" width="49%">
+<img src="docs/screenshots/tvos-search-tab.png" alt="Search on Apple TV" width="49%">
+</p>
 
 Top-level tab with its own Liquid Glass circle next to the main pill (Apple Music / iOS 26 pattern). Searches across every configured source from one place. Five sections render in priority order:
 
@@ -383,19 +387,22 @@ Same marker-driven Skip Intro / Skip Credits / Next Episode affordance as iOS. B
 
 ### Detail pages
 
-<img src="docs/screenshots/tvos-movie-detail.png" alt="tvos-movie-detail" width="480">
-
-<img src="docs/screenshots/tvos-movie-detail-versions.png" alt="tvos-movie-detail-versions" width="480">
-
-<img src="docs/screenshots/tvos-series-detail.png" alt="tvos-series-detail" width="480">
+<p>
+<img src="docs/screenshots/tvos-movie-detail.png" alt="Movie detail on Apple TV" width="49%">
+<img src="docs/screenshots/tvos-movie-detail-versions.png" alt="Movie detail Version panel on Apple TV" width="49%">
+</p>
+<p align="center">
+<img src="docs/screenshots/tvos-series-detail.png" alt="Series detail on Apple TV" width="49%">
+</p>
 
 Movie detail without and with the Version panel open. Series detail shows clear logo, episode caption, season picker, and the episode rail with the focused episode highlighted.
 
 ### Favorites and Collections
 
-<img src="docs/screenshots/tvos-favorites.png" alt="tvos-favorites" width="480">
-
-<img src="docs/screenshots/tvos-collections.png" alt="tvos-collections" width="480">
+<p>
+<img src="docs/screenshots/tvos-favorites.png" alt="Favorites on Apple TV" width="49%">
+<img src="docs/screenshots/tvos-collections.png" alt="Collections on Apple TV" width="49%">
+</p>
 
 ### Live TV
 
@@ -415,11 +422,13 @@ The sidebar of tabs collapses into the content once you pick one. The Menu butto
 
 ### Settings
 
-<img src="docs/screenshots/tvos-settings.png" alt="tvos-settings" width="480">
-
-<img src="docs/screenshots/tvos-settings-library.png" alt="tvos-settings-library" width="480">
-
-<img src="docs/screenshots/tvos-settings-playback.png" alt="tvos-settings-playback" width="480">
+<p>
+<img src="docs/screenshots/tvos-settings.png" alt="Settings root on Apple TV" width="49%">
+<img src="docs/screenshots/tvos-settings-library.png" alt="Library settings on Apple TV" width="49%">
+</p>
+<p align="center">
+<img src="docs/screenshots/tvos-settings-playback.png" alt="Playback settings on Apple TV" width="49%">
+</p>
 
 Full-screen two-pane layout: branding / section explainer on the left, focusable rows on the right. Root Settings (Connections, Library, Live TV, Playback, Sync, About…) drills into the same two-pane shape for Library, Playback, and the other categories. About has a GitHub Sponsors QR, "Report an Issue or Idea" (QR to the public tracker), and a redacted in-app quick diagnostic (Submit Quick Diagnostic sits at the bottom of About).
 
