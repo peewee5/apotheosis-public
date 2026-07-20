@@ -11,28 +11,86 @@ For narrative, human-voiced release notes ("what to look for in this build"), se
 [`SHIPPED.md`](SHIPPED.md) — this file covers the same releases in a stricter,
 categorized format.
 
+**From in-app reports:** when a Worker-filed bug is fixed, link the **public** tracking
+issue under that heading (never the private diagnostic twin). Public titles stay
+generic until closed — retitle the public issue with a safe summary at close so the
+changelog link is readable. The CI triage enricher runs on the **private** repo only
+(by design: it reads redacted logs).
+
 ## [Unreleased]
 
-## [0.9.0] - Build 6 - 2026-07-17
+_Draft for 0.9.0 (7) — landed on `main` after Build 6 shipped to TestFlight._
+
+### Added
+
+- Trakt layer-1: device OAuth + Keychain storage + DEBUG Connect (full history sync still
+  upcoming). Honors Trakt `slow_down` with capped backoff while polling.
+- Player chrome consolidation on iPhone and Apple TV: Tracks / Navigate / More (chapters
+  live under Navigate, not buried in gear).
 
 ### Fixed
 
-- Emby movie chapters now hydrate on Continue Watching, long-press / library Play,
-  discovery hero Play, and Search — not only detail-page Play after `itemDetails`
-  settles.
+- Live TV: host now consumes AetherEngine `liveSourceReset` and falls back to HLS
+  AVPlayer when a live producer wedges (SSAI / no-cut stall class). Zap-fence so a
+  disappearing player cannot start a late recovery.
+- Text subtitles no longer sit mid-screen over the playback controls when chrome is up.
+- Favorites See-All: first-paint parity, toast-only load-more, stable Emby page order
+  (no scramble while paging).
+- Emby See-All / library sort: UI order threaded into server pagination.
+- Skip Intro control cleared above the bottom chrome cluster after consolidation.
+
+### Changed
+
+- iOS player chrome edge insets retuned on device (horizontal inset 40).
+- Docs / screenshots refresh for FEATURES and README (public mirror).
+
+## [0.9.0] - Build 6 - 2026-07-17
+
+### Added
+
+- Optional TMDB online enrichment (BYOK): clear logos, cast, episode metadata, and hero
+  backfill when server artwork is thin.
+- Crowd Skip Intro / Credits lookup: TheIntroDB + IntroDB.app fallback (opt-in under
+  Playback), wired for Emby and Plex direct-play.
+- Custom scrub bar (gesture-driven) with grow-on-touch feedback; tap-to-seek no longer
+  swallowed by a no-op Slider drag.
+- Sidecar subtitle decode capped at 1 MB (network and local paths).
+- Artwork cache controls; decoded-bitmap cache for warm Movies ↔ Series tab switches.
+
+### Fixed
+
+- VOD scrub / seek restart storm that could end in `NSURLErrorDomain -1008` and a stuck
+  paused player — AetherEngine A10 bounded teardown-rebuild (see From in-app reports).
+- Emby movie chapters hydrate on Continue Watching, long-press / library Play, discovery
+  hero Play, and Search — not only detail-page Play after `itemDetails` settles.
+- Chapters load-order race on iOS detail Play (generation-fenced).
 - Discovery re-entry no longer shows a loading spinner over already-cached Movies /
-  Series rails while a background refresh runs.
+  Series rails (including Plex / XC-category rails).
 - Player options panel: Orientation chips no longer overlap Subtitle Style; chip rows
   and Mute / Chapters / Subtitle Style rows left-align with panel content.
-- Detail-page plain-text title fallbacks (no clear logo) use title casing, including
-  the tvOS Plex series surface.
+- Clear-logo flash / revert / SVG-undecodable TMDB logos; URL-cascade fallback
+  (TMDB → Emby → text).
+- Interlaced H.264 routed to the software decode path (deinterlace).
+- tvOS focus: sidebar tab-reselect pops to root; CW-rail / hero focus steals and
+  backdrop flash on warm tab switches; detail action cluster redesign.
+- Series poster title/year display; Search casing/stills; genre counting and dead keys;
+  custom-rail See-All source / axis parity; "On Demand" rail mixing sources.
+- Auto-mark-watched leaving a stale Emby resume point; series auto-mark threshold 90%.
+- Detail-page plain-text title fallbacks use title casing (including tvOS Plex series).
 
 ### Changed
 
 - Warm Movies ↔ Series tab switches reuse decoded poster/hero bitmaps via an in-memory
   `CachedAsyncImage` cache (Clear Artwork Cache still clears it).
-- tvOS About: "Report an Issue or Idea" copy; Submit Quick Diagnostic moved to the
-  bottom of the list.
+- Custom rails cache `customRailItems` to cut tab-switch body cost.
+- tvOS Settings / About polish (Report an Issue or Idea; Quick Diagnostic at bottom of
+  About; Media Server Plex link copy).
+- Bug-report free-text shows a §4.4 credential-paste reminder.
+
+### From in-app reports
+
+- [VOD scrub seek freeze (stuck paused)](https://github.com/peewee5/apotheosis-public/issues/23)
+  — fixed by AetherEngine A10 bounded teardown-rebuild.
 
 ## [0.9.0] - Build 5 - 2026-07-01
 

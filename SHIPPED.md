@@ -4,14 +4,26 @@ A running log of what's changed, newest first. If you're on a TestFlight build a
 
 ## 0.9.0 (6) · 2026-07-17
 
-**Faster home switching, reliable Emby chapters, and a tidier player options panel.**
+**TMDB enrichment, steadier scrubbing, Skip Intro crowd lookup, and a long list of Apple TV focus / discovery fixes.**
 
-- **Tab switching feels snappier.** Posters and hero artwork stay decoded in memory, so bouncing between Movies and Series no longer waits on a full re-decode every time.
-- **Discovery no longer flashes a spinner** when you return to Movies or Series after a quiet stretch — cached rails stay on screen while a background refresh runs.
-- **Emby chapters show up from every Play path** that should have them: detail Play, Continue Watching, long-press Play, library / See All / Collections / Playlists, and Search. If a title has chapter markers on the server, the Chapters row should appear in the player options panel.
-- **Player options panel layout.** Orientation chips no longer overlap Subtitle Style; Speed / Orientation chips (and Mute / Chapters / Subtitle Style) sit left-aligned with the rest of the panel.
-- **Detail titles capitalize correctly** when a show or movie has no clear logo and falls back to plain text.
-- Smaller Settings / About copy polish on Apple TV (Report an Issue or Idea; Quick Diagnostic moved to the bottom of About).
+This cut looked small in the first release-notes draft; the window after (5) actually carried a full polish + engine pass. Highlights:
+
+- **Optional TMDB enrichment (bring your own key).** Clear logos, cast, and thinner-artwork rescue when the server metadata is sparse.
+- **Scrubbing is much harder to break.** Aggressive backward seek on VOD no longer piles into a stuck-paused `-1008` state ([public #23](https://github.com/peewee5/apotheosis-public/issues/23)). Custom scrub bar + tap-to-seek behave as you’d expect.
+- **Skip Intro / Credits crowd lookup.** TheIntroDB and IntroDB.app as an opt-in fallback when the server has no markers.
+- **Emby chapters from every Play path** that should have them (CW, long-press, library, Search — not only detail Play).
+- **Home / discovery feel.** Warm Movies ↔ Series tab switches keep decoded artwork; discovery no longer flashes a spinner over cached rails; a pile of tvOS focus, hero, and clear-logo fixes.
+- **Player options panel layout.** Orientation chips no longer overlap Subtitle Style; rows left-align with the panel.
+- Interlaced H.264 deinterlaces via the software path; sidecar subtitles capped at 1 MB; Settings / About polish on Apple TV.
+
+## Unreleased · heading for 0.9.0 (7)
+
+_Not in TestFlight yet — already on the development tip._
+
+- **Player chrome consolidation** (Tracks / Navigate / More) on iPhone and Apple TV.
+- **Live TV recovery** when a live producer wedges (host `liveSourceReset` → HLS fallback).
+- **Trakt** device sign-in foundation (history sync still coming).
+- Subtitles sit nearer the scrub stack; Favorites / See-All paging polish; docs & screenshot refresh.
 
 ## 0.9.0 (5) · 2026-07-01
 
