@@ -125,9 +125,10 @@ Gear opens playback options: speed, orientation lock, mute, and subtitle style. 
 
 ### Skip Intro / Skip Credits
 
-<img src="docs/screenshots/skip-intro.png" alt="skip-intro" width="480">
-
-<img src="docs/screenshots/next-episode.png" alt="next-episode" width="480">
+<p>
+<img src="docs/screenshots/skip-intro.png" alt="Skip Intro on iPhone" width="49%">
+<img src="docs/screenshots/next-episode.png" alt="Next Episode on iPhone" width="49%">
+</p>
 
 Auto-surfaces when the playhead enters a marked region, even if the chrome is hidden. Marker sources, in order: hand-curated entries, Emby chapter markers (typed Premiere markers first, then name heuristics like "Intro"/"Outro"), Plex `<Marker>` elements, and optional crowd lookup (TheIntroDB / IntroDB.app) under Settings → Playback → Skip Intro/Credits Lookup. When a next episode is queued, the credits control reads **Next Episode** instead of Skip Credits.
 
@@ -157,9 +158,10 @@ Drag on the right side. Adjusts screen brightness without leaving the player.
 
 ### Mini player
 
-<img src="docs/screenshots/mini-player-dock.png" alt="mini-player-dock" width="320">
-
-<img src="docs/screenshots/mini-player-dock-inline.png" alt="mini-player-dock-inline" width="320">
+<p>
+<img src="docs/screenshots/mini-player-dock.png" alt="Mini player dock above the tab bar" width="49%">
+<img src="docs/screenshots/mini-player-dock-inline.png" alt="Compact inline mini player" width="49%">
+</p>
 
 Engine stays alive while you browse. Three display states:
 
@@ -227,9 +229,10 @@ A search field filters the loaded channels by name as you type, with no network 
 
 ### Quick Chips
 
-<img src="docs/screenshots/quick-chips-strip-chan.png" alt="quick-chips-strip-chan" width="320">
-
-<img src="docs/screenshots/quick-chips-strip-cat.png" alt="quick-chips-strip-cat" width="320">
+<p>
+<img src="docs/screenshots/quick-chips-strip-chan.png" alt="Quick Chips channel pins" width="49%">
+<img src="docs/screenshots/quick-chips-strip-cat.png" alt="Quick Chips category pins" width="49%">
+</p>
 
 Pinnable shortcuts above the category dropdown. Two modes: channel pins for one-tap-to-play, or category pins for one-tap-to-filter. Independent lists per mode. Cap is 10 per mode, scrollable horizontally when chips exceed the visible row. Long-press any chip to remove it with a brief toast confirmation.
 
@@ -279,9 +282,10 @@ Person autocompletes against the Emby cast/crew index. Type "Villeneuve" and get
 
 Optional, BYOK. Settings → Library → Online Enrichment. Paste your own TMDB API key; the app talks to TMDB directly from the device. Used for clear logos, missing synopsis, cast portraits, and selected-season episode-still backfill when the provider's art is thin. Provider episode art wins by default; TMDB fills gaps. Artwork cache size presets and Clear Artwork Cache live in the same Library settings area.
 
-<img src="docs/screenshots/tmdb-enrichment-before.png" alt="tmdb-enrichment-before" width="320">
-
-<img src="docs/screenshots/tmdb-enrichment-after.png" alt="tmdb-enrichment-after" width="320">
+<p>
+<img src="docs/screenshots/tmdb-enrichment-before.png" alt="Online Enrichment off" width="49%">
+<img src="docs/screenshots/tmdb-enrichment-after.png" alt="Online Enrichment on" width="49%">
+</p>
 
 Same title on Apple TV — enrichment off, then on. What changes is the fill-in: clear logo, synopsis, and cast portraits. Score badges on the backdrop (IMDb / TMDB / etc.) are burned into the server artwork, not UI Apotheosis draws — see the note under Rating badges above.
 
@@ -371,9 +375,10 @@ Built for focus, not touch — same consolidation idea as iOS, remote-first. Scr
 
 ### Skip Intro / Next Episode
 
-<img src="docs/screenshots/tvos-skip-intro.png" alt="tvos-skip-intro" width="480">
-
-<img src="docs/screenshots/tvos-next-episode.png" alt="tvos-next-episode" width="480">
+<p>
+<img src="docs/screenshots/tvos-skip-intro.png" alt="Skip Intro on Apple TV" width="49%">
+<img src="docs/screenshots/tvos-next-episode.png" alt="Next Episode on Apple TV" width="49%">
+</p>
 
 Same marker-driven Skip Intro / Skip Credits / Next Episode affordance as iOS. Buttons sit above the bottom-right control cluster. Episodes also auto-advance at the end on Emby and XC series, with the episode picker reachable mid-playback.
 
