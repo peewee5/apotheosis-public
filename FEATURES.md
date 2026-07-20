@@ -81,9 +81,10 @@ VOD movies, VOD series, and Live TV.
 
 ### M3U + XMLTV
 
-| XC Server | M3U + XMLTV |
-| --- | --- |
-| <img src="docs/screenshots/xc-server-setup.png" alt="XC Server setup on Apple TV" width="480"> | <img src="docs/screenshots/m3u-playlist-setup.png" alt="M3U Playlist setup on Apple TV" width="480"> |
+<p>
+<img src="docs/screenshots/xc-server-setup.png" alt="XC Server setup on Apple TV" width="49%">
+<img src="docs/screenshots/m3u-playlist-setup.png" alt="M3U Playlist setup on Apple TV" width="49%">
+</p>
 
 Paste a URL. 70k+ channel playlists parse without hanging. Handles CRLF line endings correctly (a lot of parsers don't). File-backed storage bypasses the UserDefaults size cap. Optional XMLTV EPG URL on the same screen.
 
