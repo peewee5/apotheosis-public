@@ -94,15 +94,20 @@ M3U and XC channels coexist in the same store via a separate ID namespace, so th
 
 ---
 
-## Player
+## iPhone & iPad
 
-<img src="docs/screenshots/player-chrome-full.png" alt="player-chrome-full" width="480">
+Same TestFlight build as Apple TV. Touch-first chrome, mini player, system PiP, and the custom tab bar live here. Shared sources, discovery, and Live TV behavior are covered above and below; this section is the phone/tablet surface.
 
-<img src="docs/screenshots/player-chrome-tracks.png" alt="player-chrome-tracks" width="480">
+### Player
 
-<img src="docs/screenshots/player-chrome-chapters.png" alt="player-chrome-chapters" width="480">
-
-<img src="docs/screenshots/player-chrome-options.png" alt="player-chrome-options" width="480">
+<p>
+<img src="docs/screenshots/player-chrome-full.png" alt="iOS player chrome" width="49%">
+<img src="docs/screenshots/player-chrome-tracks.png" alt="iOS player Tracks panel" width="49%">
+</p>
+<p>
+<img src="docs/screenshots/player-chrome-chapters.png" alt="iOS player Navigate / chapters" width="49%">
+<img src="docs/screenshots/player-chrome-options.png" alt="iOS player More / options" width="49%">
+</p>
 
 Consolidated iOS chrome (landscape). One transport / scrub / title surface; bottom-right opens the three common panels — audio & subtitles, episodes & chapters, and playback options (speed, orientation, mute, subtitle style) — instead of scattering those controls across the frame. Volume HUD still appears on left-edge drag / hardware buttons.
 
@@ -329,21 +334,20 @@ The Search circle has an 8pt invisible tap-padding extending past the visible ed
 
 ## Apple TV
 
-In the same TestFlight build as iPhone (Universal Purchase). Not a touch port: focus, the Siri Remote, and Menu-button hierarchy were rebuilt for the living room. Same sources, same data layer, same Continue Watching and dedup as the phone. Pair from your iPhone over the local network so you set servers up once and never type a URL with the on-screen keyboard. (Discovery hero is the lead image at the top of this file.)
+Same TestFlight build as iPhone (Universal Purchase). Not a touch port: focus, the Siri Remote, and Menu-button hierarchy were rebuilt for the living room. Same sources, same data layer, same Continue Watching and dedup as the phone. Pair from your iPhone over the local network so you set servers up once and never type a URL with the on-screen keyboard. (Discovery hero is the lead image at the top of this file.)
 
-### Direct-play engine
+### Player
 
-Same AetherEngine stack as iOS: MKV, HEVC 10-bit, and 4K HDR straight off Emby or Xtream with no transcode. Both 1080p and 4K HDR confirmed on Apple TV 4K.
+Same AetherEngine stack as iPhone: MKV, HEVC 10-bit, and 4K HDR straight off Emby or Xtream with no transcode. Both 1080p and 4K HDR confirmed on Apple TV 4K.
 
-<img src="docs/screenshots/tvos-player-chrome.png" alt="tvos-player-chrome" width="480">
-
-<img src="docs/screenshots/tvos-player-chrome-tracks.png" alt="tvos-player-chrome-tracks" width="480">
-
-<img src="docs/screenshots/tvos-player-chrome-chapters.png" alt="tvos-player-chrome-chapters" width="480">
-
-<img src="docs/screenshots/tvos-player-chrome-options.png" alt="tvos-player-chrome-options" width="480">
-
-### Player chrome
+<p>
+<img src="docs/screenshots/tvos-player-chrome.png" alt="tvOS player chrome" width="49%">
+<img src="docs/screenshots/tvos-player-chrome-tracks.png" alt="tvOS player Tracks panel" width="49%">
+</p>
+<p>
+<img src="docs/screenshots/tvos-player-chrome-chapters.png" alt="tvOS player Navigate / chapters" width="49%">
+<img src="docs/screenshots/tvos-player-chrome-options.png" alt="tvOS player More / options" width="49%">
+</p>
 
 Built for focus, not touch — same consolidation idea as iOS, remote-first. Scrub bar driven with the D-pad (accelerates as you keep pressing; a readout under the playhead shows where each jump lands). Bottom-right opens the three common surfaces: Audio & Subtitles (plus subtitle timing), Navigate (Episodes… + CHAPTERS when present), and More (playback speed). Season/episode browsing stays a two-pane focus flow from Navigate. Audio tracks a provider labels only "eng" get the codec and channel layout appended ("English AC3 5.1") so you can tell them apart. Title stays out of the way: episode caption above, series name below.
 
