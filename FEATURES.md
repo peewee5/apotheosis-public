@@ -335,10 +335,15 @@ Discovery snapshots paint on tab re-entry while a background refresh runs, so yo
 
 ## Search
 
-<p>
-<img src="docs/screenshots/search-tab.png" alt="Search on iPhone" width="49%">
-<img src="docs/screenshots/tvos-search-tab.png" alt="Search on Apple TV" width="49%">
+<p align="center">
+  <img src="docs/screenshots/search-tab.png" alt="Search on iPhone" width="280">
 </p>
+<p align="center"><em>iPhone</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/tvos-search-tab.png" alt="Search on Apple TV" width="720">
+</p>
+<p align="center"><em>Apple TV</em></p>
 
 Top-level tab with its own Liquid Glass circle next to the main pill (Apple Music / iOS 26 pattern). Searches across every configured source from one place. Five sections render in priority order:
 
