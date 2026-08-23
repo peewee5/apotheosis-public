@@ -2,6 +2,62 @@
 
 A running log of what's changed, newest first. If you're on a TestFlight build and want to know what to look for, start here.
 
+## 0.9.0 (11) · 2026-08-23
+
+**Series rails that paint instead of hanging, Custom Rail editors that hide empty axes, and a month of Continue Watching / Skip Intro manners from the soak.**
+
+Same soak as 0.9.0 (10). Build 10 was cut locally and expired unused so TestFlight could take 11.
+
+- **Series filter rails.** Grouping is O(n) again. A Documentary rail that used to lock the tab now appears whole.
+- **Apple TV Custom Rails.** Empty axes hide after the catalog lands. An empty picker focuses Close; Menu dismisses the sheet instead of the app.
+- **Skip Intro / CrowdSkip.** Crowd windows win over name-heuristic and typed-server chapters; mega-season shows remap to absolute episode numbers.
+- **Continue Watching.** Nil LastPlayedDate no longer steals the rail; web scrub updates resume; Remove stays off the app rail (web may still show it).
+- **Playback residuals.** Dual-audio MKV lead-in sync (vendor #19); stub-`avcC` black screen (vendor #18); series stills / synopsis; Oblivion backdrop.
+
+## 0.9.0 (10) · 2026-08-21
+
+_Expired unused 2026-08-23. Same notes shipped as 0.9.0 (11)._
+
+Soak cut after living on `main` past 0.9.0 (9). Highlights:
+
+- **Series filter rails.** Grouping is O(n) again. A Documentary rail that used to lock the tab now appears whole.
+- **Apple TV Custom Rails.** Empty axes hide after the catalog lands. An empty picker focuses Close; Menu dismisses the sheet instead of the app.
+- **Skip Intro / CrowdSkip.** Crowd windows win over name-heuristic and typed-server chapters; mega-season shows remap to absolute episode numbers.
+- **Continue Watching.** Nil LastPlayedDate no longer steals the rail; web scrub updates resume; Remove stays off the app rail (web may still show it).
+- **Playback residuals.** Dual-audio MKV lead-in sync (vendor #19); stub-`avcC` black screen (vendor #18); series stills / synopsis; Oblivion backdrop.
+
+## 0.9.0 (9) · 2026-07-31
+
+**Playback continuity after app-switch, calmer episode endings, clear logos, and binge-exit focus.**
+
+Polish-lab merge to `main`. Highlights:
+
+- **Background / app-switch.** Aether reloads and reasserts play when you leave and come back; open-window resign no longer races the first load on iPhone.
+- **Episode endings.** Post-credits false EOF gated; near-end demux walls drain like a normal end instead of freeze/skip/die. Audio language survives reloads.
+- **Binge exit.** After Next Episode + back, series detail lands on the episode you just left.
+- **Clear logos.** Smart ranking + Settings source control; padded canvases trimmed on display.
+- **See-All / volume / titles.** Option A viewport no-bounce; iOS portrait volume HUD expands on hardware buttons; remux filename episode titles cleaned with TMDB fallback.
+
+## 0.9.0 (8) · 2026-07-25
+
+**Hotfix: Apple TV Favorites See-All pages reliably; sibling versions consolidate again.**
+
+- **Favorites load-more + sibling UX.** Paging uses raw Emby `StartIndex` / full-page `hasMore` / mount+tail prefetch (`1f89d53`→`48464ab`→`c9a4e83` + restore). Display consolidates version siblings again on Movies+Series Favorites See-All (skip-consolidate was a temporary load-more lever). Device-verify owed on TF. Tip stays build **8** (never archived).
+
+## 0.9.0 (7) · 2026-07-24
+
+**Player chrome cleaned up, Live TV stays up through splices, and Apple TV scrubbing / See-All feel less brittle.**
+
+Cut A for this week, plus the open items that landed on `main` before the upload. Highlights:
+
+- **Tracks / Navigate / More.** Chapters live under Navigate on phone and Apple TV, not buried in gear. Skip Intro clears above the chrome cluster; text subs sit nearer the scrub stack.
+- **Live TV recovery + splice freeze.** When a live producer wedges, the host falls back to HLS. Mid-stream quality / SPS changes rotate the fMP4 init so video doesn't freeze ([public #22](https://github.com/peewee5/apotheosis-public/issues/22)).
+- **Apple TV rapid VOD scrub.** Chrome coalesces seeks while a prior seek is still landing — no more stacked buffering storm ([public #27](https://github.com/peewee5/apotheosis-public/issues/27)).
+- **Trakt foundation.** Device OAuth + Keychain + DEBUG Connect. Full history sync is next.
+- **Emby playlists.** Create and reorder on iPhone; Add on Apple TV. Large-playlist confirm still welcome.
+- **Favorites / See-All.** Sibling-aware hearts across See All, custom rails, and Search; scrubber clamped to mounted posters; bounded poster windows for huge libraries.
+- **Previous-session logs after force-quit.** Session logs flush on resign / background (batched FileHandle sync) so a previous-session crash report still carries the lead-up ([public #28](https://github.com/peewee5/apotheosis-public/issues/28), [public #29](https://github.com/peewee5/apotheosis-public/issues/29)).
+
 ## 0.9.0 (6) · 2026-07-17
 
 **TMDB enrichment, steadier scrubbing, Skip Intro crowd lookup, and a long list of Apple TV focus / discovery fixes.**
@@ -15,15 +71,6 @@ This cut looked small in the first release-notes draft; the window after (5) act
 - **Home / discovery feel.** Warm Movies ↔ Series tab switches keep decoded artwork; discovery no longer flashes a spinner over cached rails; a pile of tvOS focus, hero, and clear-logo fixes.
 - **Player options panel layout.** Orientation chips no longer overlap Subtitle Style; rows left-align with the panel.
 - Interlaced H.264 deinterlaces via the software path; sidecar subtitles capped at 1 MB; Settings / About polish on Apple TV.
-
-## Unreleased · heading for 0.9.0 (7)
-
-_Not in TestFlight yet — already on the development tip._
-
-- **Player chrome consolidation** (Tracks / Navigate / More) on iPhone and Apple TV.
-- **Live TV recovery** when a live producer wedges (host `liveSourceReset` → HLS fallback).
-- **Trakt** device sign-in foundation (history sync still coming).
-- Subtitles sit nearer the scrub stack; Favorites / See-All paging polish; docs & screenshot refresh.
 
 ## 0.9.0 (5) · 2026-07-01
 

@@ -53,6 +53,8 @@ One Media Server screen for Emby, Plex, and Jellyfin (tabs above). Plex can sit 
 
 **Chapters.** When the server has chapter markers, the in-player episodes/chapters control lists them (not buried in gear). Detail Play, Continue Watching, long-press Play, library / See All / Collections / Playlists, and Search all hydrate chapters the same way.
 
+**Playlists.** Create a new Emby playlist from the picker or Movies/Series hubs, reorder on iPhone, and Add from Apple TV. Large-playlist confirm still welcome; curated-rail pagination device-confirm rides the same path.
+
 ### Jellyfin
 
 Add a Jellyfin server from the same Media Server screen as Emby. The app detects which one you're connecting to and reuses the Emby code path for library browsing, Continue Watching, and playback. Early support; treat gaps as reportable.
@@ -130,7 +132,7 @@ Gear opens playback options: speed, orientation lock, mute, and subtitle style. 
 <img src="docs/screenshots/next-episode.png" alt="Next Episode on iPhone" width="49%">
 </p>
 
-Auto-surfaces when the playhead enters a marked region, even if the chrome is hidden. Marker sources, in order: hand-curated entries, Emby chapter markers (typed Premiere markers first, then name heuristics like "Intro"/"Outro"), Plex `<Marker>` elements, and optional crowd lookup (TheIntroDB / IntroDB.app) under Settings → Playback → Skip Intro/Credits Lookup. When a next episode is queued, the credits control reads **Next Episode** instead of Skip Credits.
+Auto-surfaces when the playhead enters a marked region, even if the chrome is hidden. Marker priority: hand-curated entries, then crowd windows (TheIntroDB / IntroDB.app, under Settings → Playback → Skip Intro/Credits Lookup), then Emby typed / Plex server markers, then name heuristics like "Intro"/"Outro". Crowd lookup remaps mega-season shows to the absolute episode TheIntroDB knows. When a next episode is queued, the credits control reads **Next Episode** instead of Skip Credits.
 
 ### Chapters
 
@@ -244,6 +246,8 @@ The current category has its own pin button next to the dropdown title, so you c
 
 Prev/next channel buttons replace seek controls on live streams. Order follows the active EPG filter. If you're in Sky Sports and tap next, you get the next Sky Sports channel, not the next channel in the full list. In-place swap, no dismiss animation.
 
+If a live producer wedges (SSAI / no-cut stall class), the host falls back to HLS AVPlayer. Mid-stream quality / SPS splices rotate the fMP4 init so video does not freeze on the change.
+
 ---
 
 ## Discovery
@@ -265,7 +269,7 @@ Apotheosis collapses them into a single tile across every grid, every CW rail, e
 
 Hero carousel, two cards visible. Tap the centred play button to resume directly. Tap anywhere else to open detail.
 
-Cross-source: Emby, Plex, and XC VOD share one rail. The sibling-aware dedup covered above keeps the rail clean when the same title exists in multiple places. The tile flips to whichever version you played most recently, so the artwork you see matches the version that actually plays.
+Cross-source: Emby, Plex, and XC VOD share one rail. The sibling-aware dedup covered above keeps the rail clean when the same title exists in multiple places. The tile flips to whichever version you played most recently, so the artwork you see matches the version that actually plays. Remove from Continue Watching keeps the title off the app rail; Emby web can still show it until HideFromResume ships.
 
 ### Custom Rails
 
@@ -277,6 +281,8 @@ Cross-source: Emby, Plex, and XC VOD share one rail. The sibling-aware dedup cov
 Composable filter rails on the discovery screen. 11 axes available: genre, decade, source, person, rating floor, resolution, watched state, recency, studio, audio language, and curated source (Emby BoxSets or Playlists).
 
 Person autocompletes against the Emby cast/crew index. Type "Villeneuve" and get a filmography rail.
+
+On Apple TV, axes with no values hide after the catalog lands instead of opening a dead picker. An empty picker focuses Close; Menu dismisses the sheet, not the app. A genre or multi-genre filter rail paints whole on first appearance.
 
 ### Online Enrichment (TMDB)
 
@@ -313,7 +319,7 @@ First 1000 items per library load immediately. Anything beyond that fills in the
 
 ### See All
 
-First 100 items paint immediately, next 100 trigger as you scroll near the end. No artificial cap. Favorites shows a floating "Loading more…" toast on load-more; other See All grids keep an in-grid spinner while the next page loads.
+First 100 items paint immediately, next 100 trigger as you scroll near the end. No artificial cap. Favorites shows a floating "Loading more…" toast on load-more; other See All grids keep an in-grid spinner while the next page loads. Emby-paged Favorites keep every favorited encode in the grid (so dual-version libraries keep paging); hearts still honor version siblings on See All, custom rails, and Search. On Apple TV the scrubber clamps to mounted posters so it cannot jump into blank space past the loaded window.
 
 Title sort ignores leading articles. "The Pact" lands under P, not jammed into a wall of "The X" entries. Applies to the Title A→Z / Title Z→A sort and every tie-break that breaks on title (Date Added, Year, Rating).
 
