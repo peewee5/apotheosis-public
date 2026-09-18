@@ -22,7 +22,31 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ## [Unreleased]
 
-_Empty — next cut after 0.9.0 (11)._
+### Added
+
+- Series **Up Next** rail: Favorites ∩ fresh next episode, mutually exclusive with Continue Watching (zero-progress Resume peeled onto Up Next). _(Discovery)_
+- **Response-size caps on every uncapped endpoint family** (XC player_api, M3U, XMLTV, Plex lists, bulk-Emby lists) — the manifest families now bounded with measured or correctly-classed values (50/32/8/4/2 MiB per family class), enforced by the existing streaming-cap mechanism. M3U parser: entry-count, field/URL-length, and line bounds with typed fail-closed errors. XMLTV parser: depth cap, explicit external-entity off, `parserError` consumed. The memory reserve on advertised Content-Length clamped (1 MiB). Plex fan-out partial results carry an explicit `isComplete` marker. _(Security/Networking)_
+
+### Changed
+
+- **Capped HTTP responses now stream through a chunked reader** (a `URLSessionDataDelegate` accumulator, cap-checked per delivered chunk) instead of the per-byte loop — restoring the pre-cap read performance (~42% faster cold library loads on the hottest path) while keeping every cap. The TLS-trust and redirect gates verified firing under capped reads in production configuration. _(Networking)_
+- **The Series entry architecture unified across discovery, library, CW/UpNext heroes** — all three providers route through the sealed coordinator (request admission, preparation, the entry page) with per-surface source scoping. The dead legacy value-route removed. _(Series)_
+- **Library See All, Favorites, collections, playlists, categories, On Demand, and custom rails** now route through the sealed entry path (the Library conversion) — all three providers, both platforms. _(Series)_
+- **CW/UpNext heroes** converted to the sealed architecture with season/episode hints preserved, the requested-season retention, bounded fan-out, and the tolerance cases. _(Series)_
+
+### Fixed
+
+- **Recurring test flake in `PlexSeriesEntryCoordinatorTests`** root-caused CONFIRMED (SwiftUI display-frame coalescing of rapid synthetic presentations) and fixed with `CADisplayLink` refresh pacing — 6/6 iOS + 2/2 tvOS batteries clean. _(Testing)_
+- **`.m3u8` live URLs now gate-checked at the AVPlayer boundary** — non-HTTP schemes rejected fail-closed at the HLS asset site (matching the Aether engine's existing gate). _(Security/Playback)_
+
+### Security
+
+- Response caps + parser bounds: the §3 M4/§4.5 hostile-server defenses enforced (see Added above). The entity test methodology hardened (the synthetic control proves the detector fires; the platform finding recorded: no natural entity expansion on the tested builds, verified + mechanically asserted). _(Security)_
+
+
+### Changed
+
+- Series discovery: Up Next sits **above** Continue Watching when present; tiles ~70% of the CW hero width. _(Discovery)_
 
 ## [0.9.0] - Build 11 - 2026-08-23
 

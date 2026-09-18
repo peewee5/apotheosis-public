@@ -271,6 +271,10 @@ Hero carousel, two cards visible. Tap the centred play button to resume directly
 
 Cross-source: Emby, Plex, and XC VOD share one rail. The sibling-aware dedup covered above keeps the rail clean when the same title exists in multiple places. The tile flips to whichever version you played most recently, so the artwork you see matches the version that actually plays. Remove from Continue Watching keeps the title off the app rail; Emby web can still show it until HideFromResume ships.
 
+### Up Next (Series)
+
+On Series discovery, a separate **Up Next** rail sits **above** Continue Watching when there is something to show: favorited shows with a fresh unwatched next episode (and zero-progress Resume rows peeled off CW so they are not in both). Tiles are smaller than the CW hero (~70% width) so catch-up reads as secondary to resume. Empty → the rail is absent, not a blank row.
+
 ### Custom Rails
 
 <p>
@@ -325,7 +329,7 @@ Title sort ignores leading articles. "The Pact" lands under P, not jammed into a
 
 ### Watched state
 
-Watched posters dim to 50% with a checkmark overlay. Recently Added hides watched items entirely. Other rails keep them visible-but-dimmed so rewatch is still findable.
+Watched posters dim to 50% with a checkmark overlay. The Recently Added grid hides watched items entirely. Built-in Emby Series library discovery rails also hide copies the server reports as completed, unless that copy was explicitly marked unwatched locally. Each physical copy is evaluated independently; fuller unfinished copies already in their own recent windows remain visible, without fetching replacements. These rails can be shorter; if every fetched poster is hidden, a compact Browse All link keeps that library reachable. Full-library browsing keeps completed copies. Local completion may wait for the next discovery refresh, and an unfinished or unknown server state keeps a poster visible even if an older local badge still shows watched. Movies, custom rails, fallback On Demand, Favorites, and Continue Watching/Up Next keep their existing behavior.
 
 ### Mark watched up to
 
@@ -482,3 +486,10 @@ The full security spec lives in `CLAUDE.md` / `AGENTS.md` at the repo root. If y
 - System volume control is a grey-area MPVolumeView path. The fallback to per-player gain is automatic.
 - Setting Emby audio/subtitle indices forces transcode mode. Only emit those parameters on explicit user intent.
 - Emby movie Play ingresses (detail, CW, long-press, Search, library menus) should go through `EmbyPlayback.playMovie` so chapters / HDR / skip markers stay hydrated.
+
+
+## Response bounds & the sealed entry architecture
+
+Every untrusted endpoint family (the XC `player_api`, the M3U playlist fetch, the XMLTV EPG, the Plex list endpoints, the bulk-Emby lists) carries a response-size cap — 50 MiB manifest-class (M3U/XMLTV/XC full catalogs), 32 MiB the Emby firehose (measured against the real library), 4 MiB the Plex lists, 8/2 MiB the XC per-item/small-JSON. Capped responses stream through a chunked reader (a delegate accumulator, cap-checked per delivered chunk, the TLS-trust and redirect gates verified firing under capped reads in production configuration). The M3U parser bounds entries (100,000), fields (4 KiB; keys 256 B; attrs 64), URLs (4 KiB), and lines (8 KiB pre-allocation); the XMLTV parser caps depth (32), explicitly disables external entities, and consumes `parserError` — every violation a typed fail-closed error, no partial playlist/EPG escaping as valid.
+
+The Series entry architecture is unified: discovery, library, CW/UpNext heroes, and every provider (Emby/Plex/XC) route through one sealed coordinator — the request admission, the preparation, the source-scoped departure, the entry page. The legacy direct-navigation routes are removed from the converted surfaces.
