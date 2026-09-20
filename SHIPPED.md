@@ -15,6 +15,7 @@ A running log of what's changed, newest first. If you're on a TestFlight build a
 
 ### Also this batch
 
+- **Search movies, sealed.** Movie tiles in Search (the rail and the See All grid) now open through the same loading-into-detail flow the Series tiles use — a matched experience across the whole Search surface.
 - **Warmer reopens.** Reopening a title you just looked at now skips the long loading dance — a quick poster fade straight into the detail page, and the odd "Series" text flash during the transition is gone.
 - **Search See All, reliable.** The See All grid now opens series reliably through the full navigation loop, including after switching tabs away and back.
 - **Series Up Next.** Favorited fresh drops live on their own rail above Continue Watching (not mixed into CW). Smaller tiles than CW. Zero-progress overnight drops peel off CW onto Up Next.

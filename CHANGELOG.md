@@ -27,6 +27,10 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 - **Warm-load entry flash + the loading "Series" text** — reopening a warm (cached) title now exits the loading surface in a short 250ms artwork crossfade instead of the previous ~1.4s two-transition flash, and the generic "Series" fallback text no longer appears during the transition (device-verified). _(Series)_
 - **Search See All grid** — the grid now borrows the Search stack's entry coordinator through a stack-lived host with an active-tab lease: entries open reliably through the whole root → See All → detail → back → tab-away → back → again traversal. _(Search)_
 
+### Changed
+
+- **Search movie tiles (the rail + the See All grid)** now route through the sealed entry path — the poster loading surface into the prepared detail, matching the Series behavior — instead of the direct detail push. _(Search)_
+
 ### Added
 
 - Series **Up Next** rail: Favorites ∩ fresh next episode, mutually exclusive with Continue Watching (zero-progress Resume peeled onto Up Next). _(Discovery)_
