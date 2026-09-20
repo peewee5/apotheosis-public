@@ -4,19 +4,8 @@ A running log of what's changed, newest first. If you're on a TestFlight build a
 
 ## Next cut (unreleased)
 
-### Added this batch
-
-- **Response caps on every manifest/list endpoint family** — XC, M3U, XMLTV, Plex, bulk-Emby, all bounded (50/32/8/4/2 MiB by family class), the streaming enforcement selected by arming, the reserve clamped.
-- **M3U/XMLTV parser bounds** — entry count, field/URL lengths, depth, explicit external-entity off; typed fail-closed errors; no partial playlist/EPG ever escapes as valid.
-- **Plex fan-out partial results marked** — a tolerated cap rejection no longer presents as complete.
-- **The chunked reader** — capped responses stream through a delegate accumulator (cap-checked per delivered chunk) instead of the per-byte loop: the caps' performance cost restored (~42% faster cold library loads).
-- **The Series entry architecture unified** — discovery, library (See All/Favorites/collections/playlists/categories/On Demand/custom rails), and the CW/UpNext heroes all route through the sealed coordinator with per-surface source scoping. The dead legacy value-route removed.
-- **The `.m3u8` live gate** — non-HTTP schemes at the AVPlayer boundary rejected fail-closed.
-
-### Fixed this batch
-
-- The recurring `PlexSeriesEntryCoordinatorTests` flake (SwiftUI display-frame coalescing) — `CADisplayLink` pacing, CONFIRMED, six iOS + two tvOS clean batteries.
-
+- **Warmer reopens.** Reopening a title you just looked at now skips the long loading dance — a quick poster fade straight into the detail page, and the odd "Series" text flash during the transition is gone.
+- **Search See All, reliable.** The See All grid now opens series reliably through the full navigation loop, including after switching tabs away and back.
 - **Series Up Next.** Favorited fresh drops live on their own rail above Continue Watching (not mixed into CW). Smaller tiles than CW. Zero-progress overnight drops peel off CW onto Up Next.
 
 ## 0.9.0 (11) · 2026-08-23
