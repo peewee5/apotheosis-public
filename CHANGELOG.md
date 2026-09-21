@@ -29,6 +29,9 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ### Changed
 
+- **The Movies Continue Watching hero** now routes through the sealed entry path (the CW family's conversion — the last eligible movie caller). _(Movies)_
+- **The Movies Library/Favorites/See All/curated grids** now route through the sealed entry path (the twelve destinations funneled through one converted path, the collection outcome with the contents push). _(Movies)_
+- **The Movies discovery hero + poster rails** now route through the sealed entry path (the nine-constructor conversion, the legacy route cleanly swept). _(Movies)_
 - **The Movies stack** gains the sealed entry architecture's foundation — the Movies-owned coordinator, the typed navigation path, and the stack-lived host with an active-tab lease (the same lease contract Search ships). No caller converts yet (the discovery/Library/CW conversions follow); the stack is live, tested, and pinned. _(Movies)_
 - **Search movie tiles (the rail + the See All grid)** now route through the sealed entry path — the poster loading surface into the prepared detail, matching the Series behavior — instead of the direct detail push. _(Search)_
 

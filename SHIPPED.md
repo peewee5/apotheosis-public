@@ -15,6 +15,7 @@ A running log of what's changed, newest first. If you're on a TestFlight build a
 
 ### Also this batch
 
+- **Movies is fully sealed.** Every movie surface — discovery, Library, Favorites, See All, Continue Watching — now opens through the same sealed loading-into-detail flow the Series and Search surfaces use. One consistent experience across the whole app.
 - **The Movies stack, live.** The foundation for Movies detail entries is in place — the same sealed navigation architecture the Series and Search surfaces use. No visible change yet; the discovery/Library/Continue Watching conversions come next.
 - **Search movies, sealed.** Movie tiles in Search (the rail and the See All grid) now open through the same loading-into-detail flow the Series tiles use — a matched experience across the whole Search surface.
 - **Warmer reopens.** Reopening a title you just looked at now skips the long loading dance — a quick poster fade straight into the detail page, and the odd "Series" text flash during the transition is gone.
