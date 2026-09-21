@@ -29,6 +29,7 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ### Changed
 
+- **The Movies stack** gains the sealed entry architecture's foundation — the Movies-owned coordinator, the typed navigation path, and the stack-lived host with an active-tab lease (the same lease contract Search ships). No caller converts yet (the discovery/Library/CW conversions follow); the stack is live, tested, and pinned. _(Movies)_
 - **Search movie tiles (the rail + the See All grid)** now route through the sealed entry path — the poster loading surface into the prepared detail, matching the Series behavior — instead of the direct detail push. _(Search)_
 
 ### Added
