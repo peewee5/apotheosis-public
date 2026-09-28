@@ -22,6 +22,14 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ## [Unreleased]
 
+### Fixed (the 0b-regression recovery arc, merged 2026-09-28)
+
+- **tvOS: backing out of a title from a library/See-All grid returns to the library, not the Series root** — every See-All path (11 sites: the discovery rails' See-All cards, Continue Watching and Up Next hero cards) now lands on the typed-value navigation path, so Back/Menu returns you to the grid you were browsing, exactly like the Search See-All always did. Owner-device-verified across every leg including same-tab reselect dismissal. _(Series)_
+- **tvOS: the Plex tab-return resume** — returning to the Series tab after switching away now reliably resumes the retained session's work instead of intermittently dropping it (the visibility-publication repair: one atomic root-published snapshot, no more host-lease fan-out in the task identity). _(Series)_
+- **iOS + tvOS: the Series tab's shell stability** — the outer Series host now holds a stable lease across tab switches: tab away and back and the stack is where you left it, no re-loading flash, no ghost pages; series work cancels cleanly while you're on another tab and a fresh selection works first try on return. _(Series)_
+- **Internal: the deterministic pre-existing tvOS test crash (BD-M8)** resolved via the fixture repair — the runner restart it caused is gone from future test runs. _(Docs)_
+
+
 ### Fixed
 
 - **Warm-load entry flash + the loading "Series" text** — reopening a warm (cached) title now exits the loading surface in a short 250ms artwork crossfade instead of the previous ~1.4s two-transition flash, and the generic "Series" fallback text no longer appears during the transition (device-verified). _(Series)_

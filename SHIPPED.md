@@ -4,7 +4,14 @@ A running log of what's changed, newest first. If you're on a TestFlight build a
 
 ## Next cut (unreleased)
 
-### Added this batch
+### Fixed this batch (the 0b-regression recovery arc)
+
+- **tvOS: See-All Back now lands where you'd expect.** Pick a title from any library grid reached via See All, hit Back — you're back at that grid, not dumped at the Series root. Same for the hero cards (Continue Watching, Up Next). Tab away and back, reselect the tab while you're in there — it all behaves now, and this one's worth a feel: it's a fix we shipped broken for a while without noticing, so if anything still feels weird when you're bouncing around the Series tab, say so.
+
+### Changed this batch
+
+- **tvOS/iOS: the Series tab keeps its place.** Switch tabs and come back — the stack, the library browsing, the in-progress loading — all preserved. No re-load flash, no ghost page. Series work pauses while you're elsewhere and picks back up cleanly.
+
 
 - **Response caps on every manifest/list endpoint family** — XC, M3U, XMLTV, Plex, bulk-Emby, all bounded (50/32/8/4/2 MiB by family class), the streaming enforcement selected by arming, the reserve clamped.
 - **M3U/XMLTV parser bounds** — entry count, field/URL lengths, depth, explicit external-entity off; typed fail-closed errors; no partial playlist/EPG ever escapes as valid.
