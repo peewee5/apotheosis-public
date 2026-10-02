@@ -2,7 +2,19 @@
 
 A running log of what's changed, newest first. If you're on a TestFlight build and want to know what to look for, start here.
 
-## Next cut (unreleased)
+## 0.9.0 (12) — 2026-10-02
+
+*(The previous batch's notes live below under their own heading.)*
+
+### Fixed this batch (the wave)
+
+- **XC series in Continue Watching, finally.** Start an XC series from the beginning and it actually stays in the CW rail now — worth a check if you'd given up on that. And the loading screen now shows the wide art for CW/Up Next titles instead of a weird cropped portrait.
+- **The version tags stop lying.** A 4K series no longer shows as HD in the version picker when its own dimensions say otherwise.
+- **The watched badge un-dims.** A finished series that gets a new episode loses its "all watched" dim once the new episode lands — it was staying stale before.
+
+### Changed this batch (the wave)
+
+- **The splash lets you in when there's something to show** — cached launches especially should feel noticeably snappier to land. Worth a feel across several cold starts.
 
 ### Fixed this batch (the 0b-regression recovery arc)
 

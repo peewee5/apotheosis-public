@@ -22,6 +22,22 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ## [Unreleased]
 
+## [0.9.0] - Build 12 - 2026-10-02
+
+*The recovery-and-polish wave: the stability arc lands, the hero gets curated, and the loading screen stops lying to you.*
+
+
+### Fixed (the wave, merged 2026-09-29)
+
+- **tvOS + iOS: XC episodes in Continue Watching** — starting an XC series from the beginning no longer destroys its resume context (the clear-before-play reorder); XC series now appear in the CW rail. _(Live TV)_
+- **iOS + tvOS: the loading screen matches the art you tapped** — entries from the CW/Up Next hero rails and the discovery heroes now show the landscape artwork on the loading screen instead of a forced portrait crop; portrait origins unchanged. _(Series)_
+- **tvOS + iOS: the HD-mislabeled 4K versions** — dimension-bearing Series items now take their own resolution (the resolver's cached episode-probe no longer overrides the item's real dimensions). _(Series)_
+
+### Changed (the wave)
+
+- **tvOS + iOS: the splash releases at presentability** — cached launches reveal once the surface is actually ready (including cached content) instead of waiting for the full refresh; the 5-second hold is now a cap, not a wait. _(App)_
+- **iOS + tvOS: the stale watched badge clears** — a series poster stops showing the watched dim + checkmark when a new episode arrives (the demote path); Up Next's NEW badge is unaffected. _(Series)_
+
 ### Fixed (the 0b-regression recovery arc, merged 2026-09-28)
 
 - **tvOS: backing out of a title from a library/See-All grid returns to the library, not the Series root** — every See-All path (11 sites: the discovery rails' See-All cards, Continue Watching and Up Next hero cards) now lands on the typed-value navigation path, so Back/Menu returns you to the grid you were browsing, exactly like the Search See-All always did. Owner-device-verified across every leg including same-tab reselect dismissal. _(Series)_
