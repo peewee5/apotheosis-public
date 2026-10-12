@@ -22,10 +22,9 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ## [Unreleased]
 
-## [0.9.0] - Build 12 - 2026-10-02
+### Added (the T55 logo treatment, merged 2026-10-11/12)
 
-*The recovery-and-polish wave: the stability arc lands, the hero gets curated, and the loading screen stops lying to you.*
-
+- **tvOS + iOS: dark logos read on dark backdrops** — dark-on-dark logos (pure-black ink on a fade-darkened backdrop) render with a subtle light halo at first paint on the hero/detail surfaces, so the lettering reads against the backdrop instead of dissolving into it. Source-independent: any genuinely dark logo on any dark backdrop, treated identically; light-ink logos (white/charcoal-dominant lettering, even with baked-in dark outlines) stay untreated. _(Discovery)_
 
 ### Fixed (the wave, merged 2026-09-29)
 

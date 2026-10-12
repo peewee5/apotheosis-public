@@ -2,9 +2,11 @@
 
 A running log of what's changed, newest first. If you're on a TestFlight build and want to know what to look for, start here.
 
-## 0.9.0 (12) — 2026-10-02
+## Next cut (unreleased)
 
-*(The previous batch's notes live below under their own heading.)*
+### New this batch
+
+- **Dark logos read on dark backdrops.** Logo titles with pure-dark ink on a dark backdrop now get a subtle light halo at first paint — the lettering reads instead of dissolving into the art. Only genuinely dark ink treats: white/charcoal-dominant logos stay clean and untouched.
 
 ### Fixed this batch (the wave)
 
