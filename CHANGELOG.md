@@ -22,6 +22,19 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ## [Unreleased]
 
+### Changed
+- The loading experience is rebuilt end to end: the loading page is dead — tapping any title paints a blurred backdrop preview immediately (a 240px base fetched while you browse), the detail's art resolves from that same image, and the Play button, metadata, and episode list arrive together. No black screens, no placeholder skeletons, no content flash. _(Discovery)_
+- Warm re-entries are near-instant (~100ms measured): every entry caches its backdrop, logo, and metadata at admission, so returning to a title paints the full curtain immediately. _(Discovery)_
+- Movies and Search now behave identically to Series entries (the same curtain, the same warm-up, the same instant re-entries) — including a per-movie metadata cache and the movie logo admission cache. _(Discovery)_
+- One network fetch per artwork URL instead of up to three concurrent duplicate fetches (a single-flight registry with per-caller timeout discipline). _(Engine)_
+- The detail logo renders at its final size and position from its first paint — the curtain and the detail share a single-sourced placement, so the logo never jumps at the reveal. _(Discovery)_
+- A new spinner (a ring with a sweeping arc) replaces the segmented system spinner in the loading curtain. _(Discovery)_
+
+### Fixed
+- Fixed the tvOS back button (Menu) closing the app instead of returning to the grid while a detail was loading — the loading state now owns a focus anchor so the menu always pops. _(Navigation)_
+- Fixed detail entries from the Movies tab doing nothing until the Series tab had been opened once — a stale mount flag in the shared entry machinery; each tab now owns its own mounting. _(Navigation)_
+- Fixed the wrong logo variant (the server's banner artwork) showing where the enriched clear-logo should be — the logo selection is deterministic per title. *(Rides the post-merge logo unit.)* _(Discovery)_
+
 ### Added (the T55 logo treatment, merged 2026-10-11/12)
 
 - **tvOS + iOS: dark logos read on dark backdrops** — dark-on-dark logos (pure-black ink on a fade-darkened backdrop) render with a subtle light halo at first paint on the hero/detail surfaces, so the lettering reads against the backdrop instead of dissolving into it. Source-independent: any genuinely dark logo on any dark backdrop, treated identically; light-ink logos (white/charcoal-dominant lettering, even with baked-in dark outlines) stay untreated. _(Discovery)_

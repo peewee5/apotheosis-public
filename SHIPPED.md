@@ -5,6 +5,11 @@ A running log of what's changed, newest first. If you're on a TestFlight build a
 ## Next cut (unreleased)
 
 ### New this batch
+- **The loading experience, rebuilt.** Tap any title — the blurred artwork paints instantly, and the page comes into focus from that same image. No loading screens anywhere. Going back in is instant.
+- Movies and Search work exactly like Series now — same instant art, same fast returns.
+- The back button always works, even during a load.
+- Movies open right away from a fresh app launch (no more needing to visit Series first).
+
 
 - **Dark logos read on dark backdrops.** Logo titles with pure-dark ink on a dark backdrop now get a subtle light halo at first paint — the lettering reads instead of dissolving into the art. Only genuinely dark ink treats: white/charcoal-dominant logos stay clean and untouched.
 
