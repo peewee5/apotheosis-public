@@ -1,3 +1,10 @@
+## What's New — the filmography arc
+
+- **Tap a face, meet the person.** Every face in the app now opens a person page — known-for titles, the full credit list. One tap from there into any of them. Worth a wander: the cast rails on Series and Movie details, the hero, search results.
+- **Credit taps get the curtain.** Tapping a title from a person page behaves like every other entry — same blurred-backdrop reveal, same instant warm returns. Both movie and series credits.
+- **Warm Series entries are near-instant.** ~180ms measured on the big TV — no more spinner beat on the way into a series from the library.
+- **One spinner, everywhere.** The ring-and-arc spinner now owns all 52 loading surfaces, including the player's buffering state — no more mixed spinner styles anywhere.
+
 # What's new in Apotheosis
 
 A running log of what's changed, newest first. If you're on a TestFlight build and want to know what to look for, start here.

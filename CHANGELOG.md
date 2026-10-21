@@ -22,13 +22,19 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ## [Unreleased]
 
+### Added (the filmography arc, merged 2026-10-21)
+
+- **Person pages and filmography browsing** — tap a face anywhere in the app (hero, cast rail, search) and the person's page opens directly: their known-for titles, the full credit list, one tap away from any of them. Duplicate credits admit a fresh visit, matching peer behavior. _(Discovery)_
+- **The title-curtain on credit taps** — tapping a title from a person page gives it the full curtain treatment (blurred-backdrop preview, deterministic art) exactly like every other entry in the app, for both movie and series credits. _(Discovery)_
+
 ### Changed
+- Warm Series entries from the library are near-instant (~180ms measured on device): the entry seeds from data the rail already holds instead of re-asking the server, eliminating a multi-second round-trip on single-copy titles. _(Discovery)_
 - The loading experience is rebuilt end to end: the loading page is dead — tapping any title paints a blurred backdrop preview immediately (a 240px base fetched while you browse), the detail's art resolves from that same image, and the Play button, metadata, and episode list arrive together. No black screens, no placeholder skeletons, no content flash. _(Discovery)_
 - Warm re-entries are near-instant (~100ms measured): every entry caches its backdrop, logo, and metadata at admission, so returning to a title paints the full curtain immediately. _(Discovery)_
 - Movies and Search now behave identically to Series entries (the same curtain, the same warm-up, the same instant re-entries) — including a per-movie metadata cache and the movie logo admission cache. _(Discovery)_
 - One network fetch per artwork URL instead of up to three concurrent duplicate fetches (a single-flight registry with per-caller timeout discipline). _(Engine)_
 - The detail logo renders at its final size and position from its first paint — the curtain and the detail share a single-sourced placement, so the logo never jumps at the reveal. _(Discovery)_
-- A new spinner (a ring with a sweeping arc) replaces the segmented system spinner in the loading curtain. _(Discovery)_
+- One spinner everywhere: a ring with a sweeping arc replaces the segmented system spinner at all 52 loading surfaces (settings sign-ins, detail loads, the player's buffering state — one visual language app-wide). _(Discovery)_
 
 ### Fixed
 - Fixed the tvOS back button (Menu) closing the app instead of returning to the grid while a detail was loading — the loading state now owns a focus anchor so the menu always pops. _(Navigation)_

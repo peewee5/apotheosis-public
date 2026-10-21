@@ -286,6 +286,8 @@ Composable filter rails on the discovery screen. 11 axes available: genre, decad
 
 Person autocompletes against the Emby cast/crew index. Type "Villeneuve" and get a filmography rail.
 
+Tap any face anywhere in the app (hero, cast rail, search) and the person's page opens directly: known-for titles, the full credit list, one tap from any of them back into playback. Credit taps get the same curtain entry treatment as every other title.
+
 On Apple TV, axes with no values hide after the catalog lands instead of opening a dead picker. An empty picker focuses Close; Menu dismisses the sheet, not the app. A genre or multi-genre filter rail paints whole on first appearance.
 
 ### Online Enrichment (TMDB)
@@ -486,10 +488,3 @@ The full security spec lives in `CLAUDE.md` / `AGENTS.md` at the repo root. If y
 - System volume control is a grey-area MPVolumeView path. The fallback to per-player gain is automatic.
 - Setting Emby audio/subtitle indices forces transcode mode. Only emit those parameters on explicit user intent.
 - Emby movie Play ingresses (detail, CW, long-press, Search, library menus) should go through `EmbyPlayback.playMovie` so chapters / HDR / skip markers stay hydrated.
-
-
-## Response bounds & the sealed entry architecture
-
-Every untrusted endpoint family (the XC `player_api`, the M3U playlist fetch, the XMLTV EPG, the Plex list endpoints, the bulk-Emby lists) carries a response-size cap — 50 MiB manifest-class (M3U/XMLTV/XC full catalogs), 32 MiB the Emby firehose (measured against the real library), 4 MiB the Plex lists, 8/2 MiB the XC per-item/small-JSON. Capped responses stream through a chunked reader (a delegate accumulator, cap-checked per delivered chunk, the TLS-trust and redirect gates verified firing under capped reads in production configuration). The M3U parser bounds entries (100,000), fields (4 KiB; keys 256 B; attrs 64), URLs (4 KiB), and lines (8 KiB pre-allocation); the XMLTV parser caps depth (32), explicitly disables external entities, and consumes `parserError` — every violation a typed fail-closed error, no partial playlist/EPG escaping as valid.
-
-The Series entry architecture is unified: discovery, library, CW/UpNext heroes, and every provider (Emby/Plex/XC) route through one sealed coordinator — the request admission, the preparation, the source-scoped departure, the entry page. The legacy direct-navigation routes are removed from the converted surfaces.
