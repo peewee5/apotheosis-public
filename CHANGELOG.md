@@ -22,12 +22,31 @@ never mirror enriched private titles): [`docs/PUBLIC_ISSUE_CLOSE_RITUAL.md`](doc
 
 ## [Unreleased]
 
+### Fixed
+- **The entry flash is gone** _(Discovery)_ — the detail page can no longer flash black or swap to the wrong art mid-load: the loading curtain now holds until the page's actual images are ready, then reveals everything at once.
+- **Popular titles have their artwork again** _(Discovery)_ — movies and series with especially large artwork libraries on TMDB (Stranger Things, Wicked, and friends) lost their TMDB artwork entirely; the art library now handles them correctly instead of treating abundance as an error.
+- **Continue Watching entries get the curtain** _(Discovery)_ — series cards on the Continue Watching rail now carry their own artwork into the loading curtain instead of holding on a bare screen.
+- **One art family per loading curtain** _(Discovery)_ — the curtain no longer mixes server artwork with TMDB artwork on the same load (the backdrop and the title logo now come from the same source).
+
+
+### Added
+- **Canvas — the clean-art engine, complete:** TMDB-preferred artwork everywhere by default (the one-line "Prefer my server's artwork" opt-out in Settings), instant poster fills (the identity-first composition — no server round-trips for identified titles), the branded primary poster on every surface (search, rails, heroes, CW cards, details, See-All grids, favorites, collections' contents), the CW/Up Next cards flipping in place on the posture change, and high-resolution artwork on 4K (w1280 backdrops, w500/w600 posters — the search and library grids sized to their render surfaces).
+
+### Changed
+- The artwork engine's budget is now fair and symmetric: the hero enrichment and the rail/grid fills each have a guaranteed lane (neither starves the other), and deferred fills retry when capacity frees instead of settling to server art.
+
+### Fixed
+- **The Goosebumps-class variant fix:** the right title now serves the *branded* poster (TMDB's canonical primary) instead of the first list-ranked image.
+- **The root heroes no longer blank on the posture flip** — the engagement-class re-trigger re-stages and re-freezes the hero pool in place.
+- **The staggered poster settle on the library grids' cold load** is registered for the follow-up polish (the blank-slate cold load).
+
 ### Added (the filmography arc, merged 2026-10-21)
 
 - **Person pages and filmography browsing** — tap a face anywhere in the app (hero, cast rail, search) and the person's page opens directly: their known-for titles, the full credit list, one tap away from any of them. Duplicate credits admit a fresh visit, matching peer behavior. _(Discovery)_
 - **The title-curtain on credit taps** — tapping a title from a person page gives it the full curtain treatment (blurred-backdrop preview, deterministic art) exactly like every other entry in the app, for both movie and series credits. _(Discovery)_
 
 ### Changed
+- **Artwork posture flip (Q-B4, 2026-10-25):** fresh installs and picker-less upgrades now default to Prefer TMDB artwork (engaged enrichment) instead of Prefer Server. A one-time migration flips a stored "Prefer Server" to Prefer TMDB — once, ever; Text Only, Smart, and an explicitly re-picked Prefer Server are never touched. Don't want TMDB art? Settings → Library has a one-line "Prefer my server's artwork" toggle (both platforms) that returns you to the old disengaged posture. _(Discovery)_
 - Warm Series entries from the library are near-instant (~180ms measured on device): the entry seeds from data the rail already holds instead of re-asking the server, eliminating a multi-second round-trip on single-copy titles. _(Discovery)_
 - The loading experience is rebuilt end to end: the loading page is dead — tapping any title paints a blurred backdrop preview immediately (a 240px base fetched while you browse), the detail's art resolves from that same image, and the Play button, metadata, and episode list arrive together. No black screens, no placeholder skeletons, no content flash. _(Discovery)_
 - Warm re-entries are near-instant (~100ms measured): every entry caches its backdrop, logo, and metadata at admission, so returning to a title paints the full curtain immediately. _(Discovery)_

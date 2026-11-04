@@ -11,6 +11,15 @@ A running log of what's changed, newest first. If you're on a TestFlight build a
 
 ## Next cut (unreleased)
 
+**What to Test**
+- **Enter any title — watch the load.** The curtain should hold with a blurred backdrop and the title's clean logo, then drop into a fully-loaded page. No black flash, no wrong-art flicker, no spinner-on-black.
+- **The popular ones you know** (Stranger Things, recent big releases): they should have the nice TMDB art now — on the rails and on the curtain — not just their server fallback.
+- **Continue Watching tiles**: press one — the curtain should show the series' own art while it loads.
+
+
+### The artwork posture flip (read this one)
+- **TMDB artwork is now the default.** Fresh installs (and upgrades that never picked a side) now prefer TMDB art instead of waiting on your server's. If you had "Prefer Server" picked, a one-time migration moves you over too — once, ever, and only that setting; Text Only and Smart folks are left alone. Not a fan? Settings → Library (or the tvOS Library panel) has a new one-line **"Prefer my server's artwork"** toggle that puts you right back. Everything else about how art resolves is unchanged.
+
 ### New this batch
 - **The loading experience, rebuilt.** Tap any title — the blurred artwork paints instantly, and the page comes into focus from that same image. No loading screens anywhere. Going back in is instant.
 - Movies and Search work exactly like Series now — same instant art, same fast returns.
